@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<meta name="theme-color" content="#F4ECDF" />
+<title>3am Mom · معك ليلاً</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=DM+Sans:opsz,wght@9..40,400..500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Mumzworld-inspired palette: warm pink-coral primary, cream backdrop, deep aubergine ink */
+    --bg-cream: #FFF6F1;
+    --bg-cream-soft: #FCEAE0;
+    --bg-cream-deep: #F8DDD0;
+    --ink: #2A0F1F;            /* deep aubergine — Mumzworld's secondary */
+    --ink-soft: #5C3144;
+    --umber: #8C5469;
+    --amber: #EE5A8C;          /* Mumzworld pink (primary) */
+    --amber-soft: #F08AAA;
+    --peach: #FBC4D5;
+    --rose: #F4A6C0;
+    --indigo: #4D1B36;         /* deeper aubergine (used inside the orb) */
+    --indigo-deep: #2A0F1F;
+    --crimson: #C2185B;
+    --crimson-soft: #E91E63;
+    --sage: #6FB07F;
+    --gold: #F5B945;           /* warm accent */
+
+    --serif: "Fraunces", "Iowan Old Style", "Apple Garamond", Georgia, serif;
+    --sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+
+    --maxw: 720px;
+
+    --orb-amp: 0;
+    --agent-amp: 0;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg-cream);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-feature-settings: "ss01", "ss02";
+    font-size: 17px;
+    line-height: 1.55;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-image:
+      radial-gradient(ellipse 65% 55% at 20% 0%, rgba(238, 90, 140, 0.18), transparent 60%),
+      radial-gradient(ellipse 45% 45% at 100% 100%, rgba(251, 196, 213, 0.55), transparent 70%),
+      radial-gradient(ellipse 100% 80% at 50% 100%, rgba(42, 15, 31, 0.04), transparent 70%);
+    background-attachment: fixed;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    mix-blend-mode: multiply;
+    z-index: 1;
+  }
+
+  .page {
+    position: relative;
+    z-index: 2;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 32px 24px 48px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 8px;
+  }
+  .wordmark {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-variation-settings: "opsz" 12;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .wordmark::before {
+    content: "✦";
+    color: var(--amber);
+    font-size: 12px;
+    transform: translateY(-1px);
+  }
+  .wordmark .ar {
+    font-style: italic;
+    letter-spacing: 0.05em;
+    color: var(--umber);
+    font-size: 13px;
+  }
+  .header-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--umber);
+    opacity: 0.75;
+  }
+  .header-meta .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--sage);
+    margin-right: 6px;
+    vertical-align: middle;
+    box-shadow: 0 0 6px rgba(122, 139, 111, 0.6);
+  }
+
+  .stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0 24px;
+    text-align: center;
+  }
+
+  .orb-wrap {
+    position: relative;
+    width: clamp(220px, 38vmin, 320px);
+    height: clamp(220px, 38vmin, 320px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .orb-rings {
+    position: absolute;
+    inset: -22%;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .orb-rings svg { width: 100%; height: 100%; display: block; }
+  .orb-rings circle {
+    fill: none;
+    stroke: var(--umber);
+    stroke-width: 0.7;
+    opacity: 0.18;
+  }
+  .orb-rings .ring-2 {
+    animation: ring-breath 9s ease-in-out infinite;
+    transform-origin: center;
+  }
+  @keyframes ring-breath {
+    0%, 100% { transform: scale(1); opacity: 0.18; }
+    50% { transform: scale(1.04); opacity: 0.30; }
+  }
+
+  .orb {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 32% 28%, rgba(251, 196, 213, 0.95) 0%, transparent 38%),
+      radial-gradient(circle at 70% 75%, rgba(77, 27, 54, 0.95) 0%, transparent 55%),
+      radial-gradient(circle at 50% 50%, var(--amber) 0%, var(--indigo-deep) 78%);
+    box-shadow:
+      0 0 calc(60px + var(--orb-amp) * 80px) rgba(238, 90, 140, calc(0.35 + var(--orb-amp) * 0.4)),
+      0 0 200px rgba(238, 90, 140, 0.18),
+      inset -22px -32px 60px rgba(42, 15, 31, 0.55),
+      inset 22px 32px 60px rgba(251, 196, 213, 0.5);
+    transform: scale(calc(1 + var(--orb-amp) * 0.06));
+    transition: transform 100ms ease-out, box-shadow 200ms ease-out;
+    will-change: transform, box-shadow;
+  }
+
+  .orb::before,
+  .orb::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .orb::before {
+    inset: 0;
+    background: radial-gradient(circle at 28% 28%, rgba(251, 196, 213, 0.75) 0%, transparent 35%);
+    animation: orb-drift 14s ease-in-out infinite alternate;
+    mix-blend-mode: screen;
+  }
+  .orb::after {
+    inset: 8%;
+    background: radial-gradient(circle at 65% 38%, rgba(245, 185, 69, 0.45) 0%, transparent 50%);
+    animation: orb-drift-2 11s ease-in-out infinite alternate;
+    mix-blend-mode: screen;
+  }
+  @keyframes orb-drift {
+    from { transform: translate(0,0) rotate(0deg); }
+    to   { transform: translate(6px,-8px) rotate(20deg); }
+  }
+  @keyframes orb-drift-2 {
+    from { transform: translate(0,0) rotate(0deg); }
+    to   { transform: translate(-8px,6px) rotate(-25deg); }
+  }
+
+  .orb-wrap[data-state="thinking"] .orb {
+    animation: orb-spin 4.5s linear infinite;
+  }
+  @keyframes orb-spin {
+    from { filter: hue-rotate(0deg); }
+    to   { filter: hue-rotate(15deg); }
+  }
+  .orb-wrap[data-state="speaking"] .orb {
+    transform: scale(calc(1 + var(--agent-amp) * 0.10));
+    box-shadow:
+      0 0 calc(80px + var(--agent-amp) * 140px) rgba(238, 90, 140, calc(0.5 + var(--agent-amp) * 0.4)),
+      0 0 240px rgba(245, 185, 69, 0.22),
+      inset -22px -32px 60px rgba(42, 15, 31, 0.55),
+      inset 22px 32px 60px rgba(251, 196, 213, 0.6);
+  }
+  .orb-wrap[data-state="ended"] .orb,
+  .orb-wrap[data-state="connecting"] .orb {
+    filter: saturate(0.7) brightness(0.85);
+  }
+
+  .status {
+    margin-top: 28px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-variation-settings: "opsz" 32;
+    font-size: 22px;
+    color: var(--ink);
+    letter-spacing: 0.005em;
+    transition: color 200ms ease;
+    min-height: 1.6em;
+  }
+  .status .dim { color: var(--ink-soft); }
+
+  .controls {
+    margin-top: 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .primary-btn {
+    appearance: none;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--bg-cream);
+    font-family: var(--serif);
+    font-weight: 400;
+    font-variation-settings: "opsz" 14;
+    font-size: 15px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 200ms ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+  }
+  .primary-btn:hover {
+    background: var(--indigo-deep);
+    border-color: var(--indigo-deep);
+    transform: translateY(-1px);
+  }
+  .primary-btn[data-state="listening"],
+  .primary-btn[data-state="thinking"],
+  .primary-btn[data-state="speaking"] {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+  .primary-btn[data-state="listening"]::before,
+  .primary-btn[data-state="thinking"]::before,
+  .primary-btn[data-state="speaking"]::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--crimson);
+    box-shadow: 0 0 0 0 rgba(169, 29, 43, 0.6);
+    animation: rec-pulse 1.6s ease-out infinite;
+  }
+  @keyframes rec-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(169, 29, 43, 0.55); }
+    70%  { box-shadow: 0 0 0 12px rgba(169, 29, 43, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(169, 29, 43, 0); }
+  }
+
+  .primary-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .conversation {
+    flex: 1;
+    margin-top: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .escalation {
+    background: linear-gradient(135deg, var(--crimson) 0%, var(--crimson-soft) 100%);
+    color: #FDF6EC;
+    padding: 18px 22px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(169, 29, 43, 0.28);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    line-height: 1.55;
+    animation: escalate-in 400ms ease-out both;
+  }
+  @keyframes escalate-in {
+    from { opacity: 0; transform: translateY(-8px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .escalation .ic {
+    flex: 0 0 auto;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 18px;
+    margin-top: 2px;
+  }
+  .escalation .body { flex: 1; }
+  .escalation .title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 18px;
+    margin: 0 0 4px;
+    letter-spacing: 0.01em;
+  }
+  .escalation .advice {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 16px;
+    margin: 0 0 8px;
+    line-height: 1.6;
+  }
+  .escalation .esc-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+
+  .msg {
+    max-width: 78%;
+    padding: 12px 18px 14px;
+    border-radius: 18px;
+    line-height: 1.6;
+    font-size: 17px;
+    animation: msg-in 240ms ease-out both;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+  }
+  @keyframes msg-in {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .msg.user {
+    align-self: flex-end;
+    background: var(--ink);
+    color: var(--bg-cream);
+    font-family: var(--sans);
+    font-weight: 400;
+    border-bottom-right-radius: 6px;
+  }
+  .msg.agent {
+    align-self: flex-start;
+    background: var(--bg-cream-deep);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-style: normal;          /* readable for long replies — italic was hard to scan */
+    font-weight: 400;
+    font-variation-settings: "opsz" 18;
+    border-bottom-left-radius: 6px;
+    border-left: 3px solid var(--amber);   /* small Mumzworld-pink tag */
+    padding-left: 16px;
+  }
+  .msg[dir="rtl"] { text-align: right; }
+  .msg[dir="rtl"].agent {
+    border-left: none;
+    border-right: 3px solid var(--amber);
+    padding-left: 18px;
+    padding-right: 16px;
+  }
+  .msg.partial { opacity: 0.85; }            /* less faded so streaming text stays readable */
+
+  .tool-hint {
+    align-self: flex-start;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--umber);
+    padding: 4px 12px;
+    border: 1px dashed rgba(122, 92, 63, 0.3);
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    animation: msg-in 240ms ease-out both;
+  }
+  .tool-hint::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--amber);
+    animation: dot-fade 1.4s ease-in-out infinite;
+  }
+  @keyframes dot-fade {
+    0%, 100% { opacity: 0.3; }
+    50%      { opacity: 1; }
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    align-self: stretch;
+    margin: 4px 0 8px;
+    animation: msg-in 280ms ease-out both;
+  }
+  .product {
+    border: 1px solid rgba(122, 92, 63, 0.18);
+    background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(2px);
+    border-radius: 14px;
+    padding: 14px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+  .product:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(31, 36, 81, 0.08);
+  }
+  .product .name {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-variation-settings: "opsz" 18;
+    font-size: 16px;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .product .name-ar {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--umber);
+    direction: rtl;
+    text-align: right;
+  }
+  .product .desc {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+  .product .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 4px;
+  }
+  .product .price {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .product .price small {
+    font-weight: 400;
+    color: var(--umber);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-right: 4px;
+  }
+  .product .link {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amber);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+
+  .footer {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .text-input-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background: rgba(255,255,255,0.55);
+    border: 1px solid rgba(31, 36, 81, 0.10);
+    border-radius: 14px;
+    padding: 4px 6px 4px 18px;
+    transition: border-color 180ms ease, background 180ms ease;
+  }
+  .text-input-row:focus-within {
+    border-color: rgba(31, 36, 81, 0.4);
+    background: rgba(255,255,255,0.85);
+  }
+  .text-input-row input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: var(--serif);
+    font-size: 16px;
+    padding: 12px 0;
+    color: var(--ink);
+    outline: none;
+  }
+  .text-input-row input::placeholder {
+    color: var(--umber);
+    opacity: 0.7;
+    font-style: italic;
+  }
+  .send-btn {
+    appearance: none;
+    border: none;
+    background: var(--ink);
+    color: var(--bg-cream);
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: var(--serif);
+    font-size: 16px;
+    transition: background 180ms ease, transform 120ms ease;
+  }
+  .send-btn:hover { background: var(--indigo-deep); }
+  .send-btn:active { transform: scale(0.95); }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--umber);
+    opacity: 0.7;
+  }
+  .meta .timer { font-variant-numeric: tabular-nums; }
+
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--bg-cream);
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 14px;
+    box-shadow: 0 8px 28px rgba(14, 17, 41, 0.25);
+    opacity: 0;
+    transition: all 240ms ease;
+    z-index: 100;
+    pointer-events: none;
+    max-width: 90vw;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  @media (max-width: 540px) {
+    .page { padding: 22px 18px 32px; }
+    body  { font-size: 16px; }
+    .status { font-size: 19px; }
+    .msg    { font-size: 16px; max-width: 88%; }
+    .wordmark { font-size: 12px; }
+    .wordmark .ar { font-size: 11px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orb::before, .orb::after, .orb-rings .ring-2,
+    .primary-btn[data-state="listening"]::before { animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header>
+    <div class="wordmark">
+      <span>3am Mom</span>
+      <span class="ar">معك ليلاً</span>
+    </div>
+    <div class="header-meta" id="headerMeta">
+      <span class="dot"></span><span id="connStatus">offline</span>
+    </div>
+  </header>
+
+  <section class="stage">
+    <div class="orb-wrap" id="orbWrap" data-state="idle">
+      <div class="orb-rings" aria-hidden="true">
+        <svg viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="48" class="ring-1" />
+          <circle cx="50" cy="50" r="42" class="ring-2" />
+          <circle cx="50" cy="50" r="34" class="ring-3" />
+        </svg>
+      </div>
+      <div class="orb"></div>
+    </div>
+    <div class="status" id="status">Ready when you are.</div>
+    <div class="controls">
+      <button id="mainBtn" class="primary-btn" data-state="idle">Tap to talk</button>
+    </div>
+  </section>
+
+  <section class="conversation" id="conversation"></section>
+
+  <footer class="footer">
+    <div class="text-input-row">
+      <input id="textInput" type="text" placeholder="…or type your question (English or العربية)" autocomplete="off" />
+      <button id="sendBtn" class="send-btn" aria-label="send">→</button>
+    </div>
+    <div class="meta">
+      <span id="modelName">gemini-3.1-flash-live-preview</span>
+      <span class="timer" id="timer">00:00</span>
+    </div>
+  </footer>
+
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="module">
+const STATES = Object.freeze({
+  IDLE: 'idle', CONNECTING: 'connecting', LISTENING: 'listening',
+  THINKING: 'thinking', SPEAKING: 'speaking', ENDED: 'ended',
+});
+
+const LABELS = {
+  idle:       { btn: 'Tap to talk',  status: 'Ready when you are.' },
+  connecting: { btn: 'Connecting…',  status: 'Waking up…' },
+  listening:  { btn: 'End session',  status: 'Listening' },
+  thinking:   { btn: 'End session',  status: 'Thinking…' },
+  speaking:   { btn: 'End session',  status: 'Speaking' },
+  ended:      { btn: 'Tap to talk',  status: 'Session ended.' },
+};
+
+const ARABIC_RE = /[؀-ۿ]/;
+const isArabic = (s) => !!s && ARABIC_RE.test(s);
+
+function el(tag, opts = {}, ...children) {
+  const node = document.createElement(tag);
+  if (opts.cls) node.className = opts.cls;
+  if (opts.text != null) node.textContent = opts.text;
+  if (opts.dir) node.dir = opts.dir;
+  if (opts.attrs) for (const [k, v] of Object.entries(opts.attrs)) node.setAttribute(k, v);
+  for (const c of children) {
+    if (c == null) continue;
+    if (typeof c === 'string') node.appendChild(document.createTextNode(c));
+    else node.appendChild(c);
+  }
+  return node;
+}
+
+class VoiceClient {
+  constructor() {
+    this.state = STATES.IDLE;
+    this.ws = null;
+    this.captureCtx = null;
+    this.playbackCtx = null;
+    this.mediaStream = null;
+    this.workletNode = null;
+    this.analyser = null;
+    this.playbackHead = 0;
+    this.sessionStart = null;
+    this.activeUserBubble = null;
+    this.activeAgentBubble = null;
+    this.activeToolHint = null;
+    this.scheduledAudio = [];
+
+    this.orbWrap     = document.getElementById('orbWrap');
+    this.orbStyle    = this.orbWrap.style;
+    this.statusEl    = document.getElementById('status');
+    this.btn         = document.getElementById('mainBtn');
+    this.conv        = document.getElementById('conversation');
+    this.textInput   = document.getElementById('textInput');
+    this.sendBtn     = document.getElementById('sendBtn');
+    this.toast       = document.getElementById('toast');
+    this.modelName   = document.getElementById('modelName');
+    this.timer       = document.getElementById('timer');
+    this.connStatus  = document.getElementById('connStatus');
+
+    this.btn.addEventListener('click', () => this.toggle());
+    this.sendBtn.addEventListener('click', () => this.submitText());
+    this.textInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        this.submitText();
+      }
+    });
+
+    this.startTimerLoop();
+  }
+
+  setState(state) {
+    if (this.state === state) return;
+    this.state = state;
+    this.orbWrap.dataset.state = state;
+    this.btn.dataset.state = state;
+    const l = LABELS[state];
+    this.btn.textContent = l.btn;
+    this.statusEl.textContent = l.status;
+    this.connStatus.textContent =
+      state === STATES.IDLE ? 'offline' :
+      state === STATES.CONNECTING ? 'connecting' :
+      state === STATES.ENDED ? 'ended' : 'live';
+  }
+
+  startTimerLoop() {
+    setInterval(() => {
+      if (!this.sessionStart || this.state === STATES.IDLE || this.state === STATES.ENDED) {
+        this.timer.textContent = '00:00';
+        return;
+      }
+      const s = Math.floor((Date.now() - this.sessionStart) / 1000);
+      const mm = String(Math.floor(s / 60)).padStart(2, '0');
+      const ss = String(s % 60).padStart(2, '0');
+      this.timer.textContent = `${mm}:${ss}`;
+    }, 500);
+  }
+
+  async toggle() {
+    if (this.state === STATES.IDLE || this.state === STATES.ENDED) {
+      await this.start();
+    } else {
+      await this.stop('user');
+    }
+  }
+
+  async start() {
+    this.setState(STATES.CONNECTING);
+    this.clearConversation();
+
+    try {
+      this.mediaStream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          channelCount: 1,
+          echoCancellation: true,
+          noiseSuppression: true,
+          autoGainControl: true,
+        },
+      });
+    } catch (err) {
+      this.showToast(`Mic permission denied: ${err.message}`);
+      this.setState(STATES.IDLE);
+      return;
+    }
+
+    this.captureCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const source = this.captureCtx.createMediaStreamSource(this.mediaStream);
+
+    this.analyser = this.captureCtx.createAnalyser();
+    this.analyser.fftSize = 512;
+    this.analyser.smoothingTimeConstant = 0.6;
+    source.connect(this.analyser);
+
+    try {
+      await this.captureCtx.audioWorklet.addModule('/static/audio-worklet.js');
+    } catch (err) {
+      this.showToast('Audio worklet failed to load.');
+      await this.stop('error');
+      return;
+    }
+    this.workletNode = new AudioWorkletNode(this.captureCtx, 'pcm-capture');
+    source.connect(this.workletNode);
+
+    this.workletNode.port.onmessage = (event) => {
+      if (this.state === STATES.IDLE || this.state === STATES.ENDED) return;
+      if (!this.ws || this.ws.readyState !== WebSocket.OPEN) return;
+      const float32 = event.data;
+      const pcm16 = this.resampleFloatToPcm16(float32, this.captureCtx.sampleRate, 16000);
+      this.ws.send(pcm16.buffer);
+    };
+
+    this.playbackCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 24000 });
+    this.playbackHead = this.playbackCtx.currentTime;
+
+    const wsProto = location.protocol === 'https:' ? 'wss://' : 'ws://';
+    this.ws = new WebSocket(wsProto + location.host + '/ws');
+    this.ws.binaryType = 'arraybuffer';
+    this.ws.onopen = () => { this.sessionStart = Date.now(); };
+    this.ws.onmessage = (e) => this.handleMessage(e);
+    this.ws.onerror = () => this.showToast('Connection error');
+    this.ws.onclose = () => {
+      if (this.state !== STATES.ENDED) this.stop('disconnect');
+    };
+
+    this.amplitudeLoop();
+  }
+
+  async stop(reason) {
+    if (this.ws && this.ws.readyState === WebSocket.OPEN) {
+      try { this.ws.send(JSON.stringify({ type: 'stop' })); } catch {}
+      try { this.ws.close(); } catch {}
+    }
+    this.ws = null;
+
+    if (this.workletNode) { try { this.workletNode.disconnect(); } catch {} }
+    this.workletNode = null;
+
+    if (this.mediaStream) { this.mediaStream.getTracks().forEach(t => t.stop()); }
+    this.mediaStream = null;
+
+    if (this.captureCtx) { try { await this.captureCtx.close(); } catch {} }
+    this.captureCtx = null;
+
+    for (const src of this.scheduledAudio) { try { src.stop(); } catch {} }
+    this.scheduledAudio = [];
+
+    this.orbStyle.setProperty('--orb-amp', 0);
+    this.orbStyle.setProperty('--agent-amp', 0);
+
+    const dimSpan = document.createElement('span');
+    dimSpan.className = 'dim';
+    if (reason === 'idle') {
+      this.statusEl.textContent = 'Session ended ';
+      dimSpan.textContent = '— quiet for a while.';
+      this.statusEl.appendChild(dimSpan);
+    } else if (reason === 'hard_limit') {
+      this.statusEl.textContent = 'Session ended ';
+      dimSpan.textContent = '— max length reached.';
+      this.statusEl.appendChild(dimSpan);
+    } else if (reason === 'disconnect') {
+      this.statusEl.textContent = 'Session ended ';
+      dimSpan.textContent = '— connection closed.';
+      this.statusEl.appendChild(dimSpan);
+    } else if (reason === 'error') {
+      this.statusEl.textContent = 'Session ended ';
+      dimSpan.textContent = '— error.';
+      this.statusEl.appendChild(dimSpan);
+    } else {
+      this.statusEl.textContent = 'Session ended.';
+    }
+    this.setState(STATES.ENDED);
+  }
+
+  resampleFloatToPcm16(float32, fromRate, toRate) {
+    let samples;
+    if (fromRate === toRate) {
+      samples = float32;
+    } else {
+      const ratio = fromRate / toRate;
+      const outLen = Math.floor(float32.length / ratio);
+      samples = new Float32Array(outLen);
+      for (let i = 0; i < outLen; i++) {
+        const srcIdxF = i * ratio;
+        const idx = Math.floor(srcIdxF);
+        const frac = srcIdxF - idx;
+        const a = float32[idx] || 0;
+        const b = float32[Math.min(idx + 1, float32.length - 1)] || 0;
+        samples[i] = a + (b - a) * frac;
+      }
+    }
+    const pcm16 = new Int16Array(samples.length);
+    for (let i = 0; i < samples.length; i++) {
+      const s = Math.max(-1, Math.min(1, samples[i]));
+      pcm16[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
+    }
+    return pcm16;
+  }
+
+  amplitudeLoop() {
+    if (!this.analyser) return;
+    const buf = new Uint8Array(this.analyser.frequencyBinCount);
+    const tick = () => {
+      if (!this.analyser) return;
+      this.analyser.getByteFrequencyData(buf);
+      let sum = 0;
+      const lo = 4, hi = Math.min(buf.length - 1, 80);
+      for (let i = lo; i < hi; i++) sum += buf[i];
+      const avg = sum / (hi - lo) / 255;
+      const amp = Math.max(0, (avg - 0.04)) * 1.6;
+      this.orbStyle.setProperty('--orb-amp', Math.min(1, amp));
+      requestAnimationFrame(tick);
+    };
+    tick();
+  }
+
+  handleMessage(event) {
+    if (typeof event.data === 'string') {
+      let msg; try { msg = JSON.parse(event.data); } catch { return; }
+      this.handleJson(msg);
+    } else {
+      this.queueAgentAudio(event.data);
+    }
+  }
+
+  handleJson(msg) {
+    switch (msg.type) {
+      case 'session_started':
+        if (msg.model) this.modelName.textContent = msg.model;
+        this.setState(STATES.LISTENING);
+        break;
+      case 'transcript_user':
+        this.appendUserTranscript(msg.text);
+        if (this.state === STATES.SPEAKING || this.state === STATES.THINKING) {
+          this.setState(STATES.LISTENING);
+        }
+        break;
+      case 'transcript_agent':
+        this.appendAgentTranscript(msg.text);
+        if (this.state !== STATES.SPEAKING) this.setState(STATES.SPEAKING);
+        break;
+      case 'tool_call':
+        this.showToolCall(msg.name);
+        if (this.state === STATES.LISTENING) this.setState(STATES.THINKING);
+        break;
+      case 'tool_done':
+        this.handleToolDone(msg);
+        break;
+      case 'turn_complete': {
+        // Finalise the agent bubble so the full reply stays visible (no fade)
+        if (this.activeAgentBubble) this.activeAgentBubble.classList.remove('partial');
+        this.activeAgentBubble = null;
+        const remaining = Math.max(0, this.playbackHead - this.playbackCtx.currentTime);
+        setTimeout(() => {
+          if (this.state === STATES.SPEAKING || this.state === STATES.THINKING) {
+            this.setState(STATES.LISTENING);
+          }
+        }, remaining * 1000 + 100);
+        break;
+      }
+      case 'session_ended':
+        this.stop(msg.reason || 'ended');
+        break;
+      case 'error':
+        this.showToast(msg.message || 'Server error');
+        break;
+    }
+  }
+
+  queueAgentAudio(arrayBuffer) {
+    if (!this.playbackCtx) return;
+    if (this.state !== STATES.SPEAKING) this.setState(STATES.SPEAKING);
+
+    const pcm16 = new Int16Array(arrayBuffer);
+    if (pcm16.length === 0) return;
+
+    const float32 = new Float32Array(pcm16.length);
+    let sumSq = 0;
+    for (let i = 0; i < pcm16.length; i++) {
+      const f = pcm16[i] / 32768;
+      float32[i] = f;
+      sumSq += f * f;
+    }
+    const rms = Math.sqrt(sumSq / pcm16.length);
+    this.orbStyle.setProperty('--agent-amp', Math.min(1, rms * 5));
+
+    const buf = this.playbackCtx.createBuffer(1, float32.length, 24000);
+    buf.getChannelData(0).set(float32);
+
+    const src = this.playbackCtx.createBufferSource();
+    src.buffer = buf;
+    src.connect(this.playbackCtx.destination);
+
+    const startAt = Math.max(this.playbackCtx.currentTime, this.playbackHead);
+    src.start(startAt);
+    this.playbackHead = startAt + buf.duration;
+    this.scheduledAudio.push(src);
+    src.onended = () => {
+      const i = this.scheduledAudio.indexOf(src);
+      if (i >= 0) this.scheduledAudio.splice(i, 1);
+      if (this.scheduledAudio.length === 0) {
+        this.orbStyle.setProperty('--agent-amp', 0);
+      }
+    };
+  }
+
+  clearConversation() {
+    while (this.conv.firstChild) this.conv.removeChild(this.conv.firstChild);
+    this.activeUserBubble = null;
+    this.activeAgentBubble = null;
+    this.activeToolHint = null;
+  }
+
+  // The Live API's transcript stream can be either incremental (each event
+  // contains a small chunk to APPEND) or cumulative (each event contains the
+  // full text so far). This helper handles both: if the new text starts with
+  // the existing bubble text, we treat it as cumulative; otherwise we append.
+  // Either way, what the user sees is the COMPLETE transcript, never just the
+  // last fragment — important when audio is missed and they need to read.
+  mergeTranscript(bubble, text) {
+    if (!text) return;
+    const current = bubble.textContent;
+    if (!current) {
+      bubble.textContent = text;
+      return;
+    }
+    if (text === current) return;                       // duplicate
+    if (text.startsWith(current)) {                     // cumulative — replace
+      bubble.textContent = text;
+      return;
+    }
+    if (current.endsWith(text)) return;                 // already appended this chunk
+    bubble.textContent = current + text;                // incremental — append
+  }
+
+  appendUserTranscript(text) {
+    if (!this.activeUserBubble) {
+      this.activeUserBubble = el('div', { cls: 'msg user partial' });
+      this.conv.appendChild(this.activeUserBubble);
+    }
+    this.mergeTranscript(this.activeUserBubble, text);
+    if (isArabic(this.activeUserBubble.textContent)) this.activeUserBubble.dir = 'rtl';
+    this.scrollToEnd();
+  }
+
+  appendAgentTranscript(text) {
+    if (!this.activeAgentBubble) {
+      this.activeAgentBubble = el('div', { cls: 'msg agent partial' });
+      this.conv.appendChild(this.activeAgentBubble);
+      if (this.activeUserBubble) {
+        this.activeUserBubble.classList.remove('partial');
+        this.activeUserBubble = null;
+      }
+      if (this.activeToolHint) { this.activeToolHint.remove(); this.activeToolHint = null; }
+    }
+    this.mergeTranscript(this.activeAgentBubble, text);
+    if (isArabic(this.activeAgentBubble.textContent)) this.activeAgentBubble.dir = 'rtl';
+    this.scrollToEnd();
+  }
+
+  showToolCall(name) {
+    if (this.activeToolHint) this.activeToolHint.remove();
+    const labels = {
+      escalation_check: 'Checking safety…',
+      knowledge_search: 'Looking up guidance…',
+      product_search:   'Finding products…',
+    };
+    this.activeToolHint = el('div', { cls: 'tool-hint', text: labels[name] || `Calling ${name}…` });
+    this.conv.appendChild(this.activeToolHint);
+    this.scrollToEnd();
+  }
+
+  handleToolDone(msg) {
+    if (msg.name === 'escalation_check' && msg.flag && msg.flag.triggered) {
+      this.renderEscalation(msg.flag);
+    }
+    if (msg.name === 'product_search' && Array.isArray(msg.products) && msg.products.length) {
+      this.renderProducts(msg.products);
+    }
+  }
+
+  renderEscalation(flag) {
+    const existing = this.conv.querySelector('.escalation');
+    if (existing) existing.remove();
+
+    const niceCats = (flag.triggers || []).map(t => String(t).replace(/_/g, ' ')).join(' · ');
+    const isAr = isArabic(flag.advice || '');
+
+    const ic = el('div', { cls: 'ic', text: '!' });
+    const title = el('div', { cls: 'title', text: 'Medical attention needed' });
+    const advice = el('div', {
+      cls: 'advice',
+      text: flag.advice || 'Please contact your pediatrician immediately.',
+    });
+    if (isAr) advice.dir = 'rtl';
+    const body = el('div', { cls: 'body' }, title, advice);
+    if (niceCats) {
+      body.appendChild(el('div', { cls: 'esc-meta', text: 'NICE NG143 · ' + niceCats }));
+    }
+    const banner = el('div', { cls: 'escalation' }, ic, body);
+    this.conv.insertBefore(banner, this.conv.firstChild);
+  }
+
+  renderProducts(products) {
+    const grid = el('div', { cls: 'product-grid' });
+    for (const p of products.slice(0, 2)) {
+      const name = el('div', { cls: 'name', text: p.name_en || '' });
+      const nameAr = el('div', { cls: 'name-ar', text: p.name_ar || '' });
+      const desc = el('div', { cls: 'desc', text: p.description_en || '' });
+      const priceVal = typeof p.price_aed === 'number' ? p.price_aed.toFixed(0) : (p.price_aed || '');
+      const price = el('div', { cls: 'price' },
+        el('small', { text: 'aed' }),
+        el('span', { cls: 'amount', text: priceVal }),
+      );
+      const link = el('a', { cls: 'link', text: 'View on Mumzworld', attrs: { href: '#', tabindex: '-1' } });
+      const row = el('div', { cls: 'row' }, price, link);
+      grid.appendChild(el('div', { cls: 'product' }, name, nameAr, desc, row));
+    }
+    this.conv.appendChild(grid);
+    this.scrollToEnd();
+  }
+
+  scrollToEnd() {
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    });
+  }
+
+  submitText() {
+    const txt = this.textInput.value.trim();
+    if (!txt) return;
+    if (!this.ws || this.ws.readyState !== WebSocket.OPEN) {
+      this.showToast('Tap "Tap to talk" first to open a session.');
+      return;
+    }
+    this.ws.send(JSON.stringify({ type: 'text', content: txt }));
+    if (this.activeUserBubble) {
+      this.activeUserBubble.classList.remove('partial');
+      this.activeUserBubble = null;
+    }
+    const msg = el('div', { cls: 'msg user', text: txt });
+    if (isArabic(txt)) msg.dir = 'rtl';
+    this.conv.appendChild(msg);
+    this.textInput.value = '';
+    this.setState(STATES.THINKING);
+    this.scrollToEnd();
+  }
+
+  showToast(text) {
+    this.toast.textContent = text;
+    this.toast.classList.add('show');
+    clearTimeout(this._toastTimer);
+    this._toastTimer = setTimeout(() => this.toast.classList.remove('show'), 3500);
+  }
+}
+
+const client = new VoiceClient();
+window.__voice = client;
+</script>
+
+</body>
+</html>

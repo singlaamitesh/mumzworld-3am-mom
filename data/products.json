@@ -1,0 +1,167 @@
+[
+  {
+    "product_id": "p_ht_001",
+    "name_en": "BabyComfort Infrared Forehead Thermometer",
+    "name_ar": "ميزان حرارة بالأشعة تحت الحمراء من بيبي كومفورت",
+    "category": "health",
+    "age_range_months": [0, 60],
+    "price_aed": 149.0,
+    "description_en": "Touchless infrared forehead reading in under one second with a silent mode for sleeping babies and a fever alarm at 38C. Stores the last 30 readings so you can track a fever overnight.",
+    "description_ar": "قياس حرارة من الجبهة بدون لمس في أقل من ثانية، فيه وضع صامت للأطفال النايمين وتنبيه حرارة عند 38 درجة. يحفظ آخر 30 قراءة عشان تتابعين الحرارة بالليل.",
+    "tags": ["thermometer", "fever", "infrared", "touchless", "ميزان حرارة", "حرارة", "حمى", "قياس"]
+  },
+  {
+    "product_id": "p_ht_002",
+    "name_en": "GulfBaby Electric Nasal Aspirator",
+    "name_ar": "شفاط أنف كهربائي من غلف بيبي",
+    "category": "health",
+    "age_range_months": [0, 36],
+    "price_aed": 189.0,
+    "description_en": "Gentle electric nasal aspirator with three suction levels and a soft silicone tip. Helps clear blocked noses during colds so feeding and sleep are easier. USB rechargeable, washable parts.",
+    "description_ar": "شفاط أنف كهربائي لطيف مع ثلاث مستويات شفط وطرف سيليكون ناعم. يساعد على فتح الأنف المسدود وقت الزكام عشان الرضاعة والنوم يصيرون أسهل. يشحن بـ USB وأجزاؤه تنغسل.",
+    "tags": ["nasal aspirator", "cold", "congestion", "شفاط أنف", "زكام", "احتقان", "رضع", "baby"]
+  },
+  {
+    "product_id": "p_ht_003",
+    "name_en": "MomzCare Oral Rehydration Salts (Sachets, Pack of 10)",
+    "name_ar": "أملاح معالجة الجفاف الفموية من مومز كير، علبة 10 أكياس",
+    "category": "health",
+    "age_range_months": [6, 60],
+    "price_aed": 35.0,
+    "description_en": "Oral rehydration salt sachets formulated to WHO guidance, designed to replace fluids and electrolytes lost during vomiting or diarrhea. Mix one sachet with 200ml of clean water. For infants under 6 months, consult your doctor first.",
+    "description_ar": "أكياس أملاح معالجة الجفاف الفموية على إرشادات منظمة الصحة العالمية، تعوّض السوائل والأملاح اللي يفقدها الطفل وقت الترجيع أو الإسهال. كيس واحد مع 200 ملل ماي نظيف. للأطفال تحت 6 شهور لازم تستشيرين الدكتور أول.",
+    "tags": ["ORS", "rehydration", "electrolyte", "diarrhea", "vomiting", "أملاح", "جفاف", "إسهال"]
+  },
+  {
+    "product_id": "p_ht_004",
+    "name_en": "DesertDove Baby First Aid Kit",
+    "name_ar": "حقيبة إسعافات أولية للأطفال من ديزرت دوف",
+    "category": "health",
+    "age_range_months": [0, 60],
+    "price_aed": 220.0,
+    "description_en": "Compact baby first aid kit with infant nail scissors, saline drops, sterile gauze, soft bandages, antiseptic wipes, and a tweezer. Designed for home and travel; refills available.",
+    "description_ar": "حقيبة إسعافات أولية صغيرة للأطفال فيها مقص أظافر للرضع، قطرات ملحية، شاش معقم، لزقات طرية، مناديل مطهّرة وملقاط. مناسبة للبيت والسفر ومعها إمكانية تعبئة.",
+    "tags": ["first aid", "saline drops", "bandage", "إسعافات أولية", "قطرات ملحية", "سفر", "baby", "kit"]
+  },
+  {
+    "product_id": "p_fd_001",
+    "name_en": "GulfBaby Newborn Formula Stage 1",
+    "name_ar": "حليب أطفال مرحلة 1 من غلف بيبي",
+    "category": "feeding",
+    "age_range_months": [0, 6],
+    "price_aed": 78.0,
+    "description_en": "Stage 1 infant formula for 0-6 months, enriched with DHA and ARA to support brain and eye development. Easy-scoop 400g tin with a sealed freshness lid.",
+    "description_ar": "حليب صناعي مرحلة 1 من 0 إلى 6 شهور، مدعّم بـ DHA و ARA لدعم تطور الدماغ والنظر. علبة 400 جرام مع مكيال سهل وغطاء محكم.",
+    "tags": ["formula", "newborn", "stage 1", "حليب", "حليب أطفال", "مرحلة 1", "DHA", "رضع"]
+  },
+  {
+    "product_id": "p_fd_002",
+    "name_en": "MomzCare Double Electric Breast Pump",
+    "name_ar": "شفاط حليب كهربائي مزدوج من مومز كير",
+    "category": "feeding",
+    "age_range_months": [0, 24],
+    "price_aed": 649.0,
+    "description_en": "Hospital-grade double electric breast pump with nine suction levels and three modes. Quiet motor for night sessions and a rechargeable battery for use away from home. BPA-free flanges in two sizes.",
+    "description_ar": "شفاط حليب كهربائي مزدوج بمستوى المستشفيات، فيه 9 مستويات شفط و3 أوضاع. محرك هادي لجلسات الليل وبطارية تنشحن للاستخدام برا البيت. الفتحات بدون BPA وبمقاسين.",
+    "tags": ["breast pump", "double pump", "electric", "شفاط حليب", "رضاعة طبيعية", "شفط", "أمومة", "feeding"]
+  },
+  {
+    "product_id": "p_fd_003",
+    "name_en": "LittleStar Anti-Colic Glass Bottle 240ml",
+    "name_ar": "رضّاعة زجاج مضادة للمغص 240 مل من ليتل ستار",
+    "category": "feeding",
+    "age_range_months": [0, 12],
+    "price_aed": 55.0,
+    "description_en": "Anti-colic glass baby bottle with a vented silicone nipple that reduces air swallowing during feeds. Heat-resistant borosilicate glass, dishwasher and steriliser safe. Comes with a slow-flow nipple.",
+    "description_ar": "رضّاعة زجاج مضادة للمغص مع حلمة سيليكون فيها فتحات تهوية تقلل ابتلاع الهوا وقت الرضاعة. زجاج بوروسيليكات يتحمل الحرارة وآمن في الجلاية وجهاز التعقيم. تجي مع حلمة بطيئة الجريان.",
+    "tags": ["bottle", "anti-colic", "glass", "رضاعة", "رضّاعة", "زجاج", "مغص", "feeding"]
+  },
+  {
+    "product_id": "p_sl_001",
+    "name_en": "MomzCare Cotton Sleep Sack 1.0 TOG (12-24 months)",
+    "name_ar": "كيس نوم قطن 1.0 توج للأطفال من سنة لسنتين من مومز كير",
+    "category": "sleep",
+    "age_range_months": [12, 24],
+    "price_aed": 119.0,
+    "description_en": "Wearable sleep sack in 100 percent organic cotton, sized for one to two year olds. The 1.0 TOG rating suits Gulf homes with strong AC. Two-way zipper for easy diaper changes and shoulder snaps so it stays put.",
+    "description_ar": "كيس نوم يلبس من قطن عضوي 100٪، مقاسه للأطفال من سنة لسنتين. درجة 1.0 توج مناسبة للبيوت اللي تكييفها قوي. سحاب من الجهتين لتغيير الحفاضة بسهولة وأزرار على الكتف عشان ما ينزل.",
+    "tags": ["sleep sack", "toddler", "cotton", "TOG", "كيس نوم", "نوم", "قطن", "تكييف"]
+  },
+  {
+    "product_id": "p_sl_002",
+    "name_en": "BabyComfort Newborn Swaddle Wrap (Set of 2)",
+    "name_ar": "قماط مولود من بيبي كومفورت، طقم 2",
+    "category": "sleep",
+    "age_range_months": [0, 4],
+    "price_aed": 95.0,
+    "description_en": "Set of two stretchy bamboo swaddle wraps with hip-healthy design and easy-fasten Velcro. Helps soothe the startle reflex in newborns up to four months. Breathable for warm Gulf nights.",
+    "description_ar": "طقم من قمطين مرنين من البامبو، تصميم آمن للورك ولاصق سهل. يساعد على تهدئة منعكس الفزع عند المواليد لين عمر 4 شهور. يتنفس ومناسب لليالي الخليج الدافية.",
+    "tags": ["swaddle", "newborn", "bamboo", "قماط", "نوم", "مواليد", "tog", "wrap"]
+  },
+  {
+    "product_id": "p_sl_003",
+    "name_en": "DesertDove White Noise Sleep Soother",
+    "name_ar": "جهاز ضوضاء بيضاء لنوم الأطفال من ديزرت دوف",
+    "category": "sleep",
+    "age_range_months": [0, 36],
+    "price_aed": 175.0,
+    "description_en": "Compact white noise machine with twelve sounds including womb, rain, and soft lullabies. Adjustable timer up to eight hours and a dim night light. USB powered for travel.",
+    "description_ar": "جهاز ضوضاء بيضاء صغير فيه 12 صوت منها صوت الرحم والمطر وتهاليل هادية. مؤقت يوصل لين 8 ساعات وضو ليلي خفيف. يشتغل على USB ومناسب للسفر.",
+    "tags": ["white noise", "sleep", "soother", "ضوضاء بيضاء", "نوم", "تهدئة", "lullaby", "night light"]
+  },
+  {
+    "product_id": "p_sk_001",
+    "name_en": "LittleStar Fragrance-Free Baby Lotion 300ml",
+    "name_ar": "لوشن أطفال خالي من العطر 300 مل من ليتل ستار",
+    "category": "skincare",
+    "age_range_months": [0, 36],
+    "price_aed": 49.0,
+    "description_en": "Fragrance-free, hypoallergenic moisturising lotion formulated for sensitive newborn skin. Contains shea butter and vitamin E. Dermatologically tested and free of parabens, sulphates, and dyes.",
+    "description_ar": "لوشن مرطّب خالي من العطر ومضاد للحساسية، مصمم لبشرة المواليد الحساسة. فيه زبدة شيا وفيتامين E. مختبر من أطباء الجلد وخالي من البارابين والسلفات والألوان.",
+    "tags": ["lotion", "moisturiser", "fragrance free", "لوشن", "مرطب", "بشرة الأطفال", "حساس", "skincare"]
+  },
+  {
+    "product_id": "p_sk_002",
+    "name_en": "GulfBaby Tear-Free Baby Wash and Shampoo 500ml",
+    "name_ar": "غسول وشامبو أطفال بدون دموع 500 مل من غلف بيبي",
+    "category": "skincare",
+    "age_range_months": [0, 60],
+    "price_aed": 39.0,
+    "description_en": "Two-in-one tear-free wash and shampoo with mild plant-based cleansers and chamomile extract. pH balanced for delicate skin and scalp. Gentle enough for daily bath time in hot Gulf weather.",
+    "description_ar": "غسول وشامبو 2 في 1 بدون دموع مع منظفات نباتية لطيفة وخلاصة البابونج. متوازن الحموضة للجلد وفروة الرأس. لطيف يكفي للاستحمام اليومي في جو الخليج الحار.",
+    "tags": ["bath", "shampoo", "tear free", "غسول", "شامبو", "استحمام", "بابونج", "skincare"]
+  },
+  {
+    "product_id": "p_dp_001",
+    "name_en": "BabyComfort Premium Diapers Size 3 (Pack of 84)",
+    "name_ar": "حفاضات بريميوم مقاس 3 من بيبي كومفورت، عبوة 84",
+    "category": "diapering",
+    "age_range_months": [4, 18],
+    "price_aed": 89.0,
+    "description_en": "Premium diapers size 3 for babies 6 to 11kg, with a wetness indicator and up to 12-hour absorbency. Soft cotton-feel topsheet and breathable sides reduce nappy rash. 84-piece value pack.",
+    "description_ar": "حفاضات بريميوم مقاس 3 للأطفال من 6 إلى 11 كيلو، فيها مؤشر بلل وامتصاص يوصل لين 12 ساعة. السطح ناعم بملمس قطني والأطراف تتنفس عشان يقلل التسلخ. عبوة اقتصادية 84 حبة.",
+    "tags": ["diapers", "size 3", "wetness indicator", "حفاضات", "مقاس 3", "تسلخ", "absorbent", "value pack"]
+  },
+  {
+    "product_id": "p_dp_002",
+    "name_en": "MomzCare Sensitive Water Wipes (Pack of 12 x 60)",
+    "name_ar": "مناديل مبللة مائية للبشرة الحساسة من مومز كير، 12 علبة × 60",
+    "category": "diapering",
+    "age_range_months": [0, 36],
+    "price_aed": 110.0,
+    "description_en": "Baby wipes made of 99 percent purified water and a touch of organic chamomile, free from alcohol, parabens, and fragrance. Thick textured cloth designed for newborn skin. Twelve-pack for everyday use.",
+    "description_ar": "مناديل مبللة مكونة من 99٪ ماي نقي مع لمسة بابونج عضوي، بدون كحول وبدون بارابين وبدون عطر. قماشها سميك ومناسب لبشرة المواليد. عبوة 12 للاستخدام اليومي.",
+    "tags": ["wipes", "water wipes", "sensitive", "مناديل مبللة", "بشرة حساسة", "بدون كحول", "newborn", "diapering"]
+  },
+  {
+    "product_id": "p_mm_001",
+    "name_en": "DesertDove Bamboo Nursing Pads (Reusable, Pack of 14)",
+    "name_ar": "ضمادات رضاعة قابلة للغسل من البامبو من ديزرت دوف، 14 حبة",
+    "category": "mom_care",
+    "age_range_months": [0, 24],
+    "price_aed": 65.0,
+    "description_en": "Reusable bamboo nursing pads with a leak-proof inner layer and soft contoured fit. Machine washable and breathable, ideal for the warm Gulf climate. Comes with a small wash bag.",
+    "description_ar": "ضمادات رضاعة قابلة لإعادة الاستخدام من البامبو، فيها طبقة داخلية تمنع التسريب وتفصيلة طرية مريحة. تنغسل بالغسالة وتتنفس، مناسبة لجو الخليج الدافي. تجي معها كيس صغير للغسيل.",
+    "tags": ["nursing pads", "bamboo", "reusable", "ضمادات رضاعة", "أمومة", "رضاعة طبيعية", "washable", "mom care"]
+  }
+]

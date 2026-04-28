@@ -1,0 +1,202 @@
+[
+  {
+    "chunk_id": "kb_il_001",
+    "topic": "illness",
+    "text_en": "A temperature of 38C or higher in any baby younger than 3 months should be treated as a medical emergency. Take the baby to a doctor or the emergency department immediately and do not give paracetamol or ibuprofen at home before a clinician sees the baby. At this age fever may be the only sign of a serious bacterial infection such as meningitis or a urinary tract infection, regardless of how alert the baby looks or whether the fever responds to undressing. Always consult a doctor or go to the ER without delay.",
+    "text_ar": "إذا الطفل تحت ثلاث شهور وحرارته 38 درجة أو أكثر، هذي حالة طارئة. ودّي الطفل لطبيب الأطفال أو الطوارئ على طول، ولا تعطين باراسيتامول ولا ايبوبروفين في البيت قبل ما يشوفه دكتور. في هالعمر الحرارة ممكن تكون العلامة الوحيدة لعدوى بكتيرية خطيرة مثل التهاب السحايا أو عدوى البول، حتى لو الطفل شكله طبيعي. لازم تستشيرين دكتور أو تروحين الطوارئ بدون تأخير.",
+    "source": "NICE",
+    "source_url": "https://www.nice.org.uk/guidance/ng143",
+    "severity_tag": "red",
+    "age_range_months": [0, 3]
+  },
+  {
+    "chunk_id": "kb_il_002",
+    "topic": "illness",
+    "text_en": "Fever in babies older than 3 months is usually viral, but specific signs need attention. Persistent temperature above 39C, fever lasting more than 5 days, refusal to drink, very pale or mottled skin, or unusual drowsiness should prompt a same-day pediatric review. Aim to keep the baby comfortable, offer fluids often, and dress them in light clothing rather than wrapping. If the fever climbs above 40C, breathing changes, or the baby becomes hard to wake, treat it as urgent and consult a doctor or go to the ER.",
+    "text_ar": "الحرارة عند الأطفال فوق ثلاث شهور أغلبها فيروسية، بس فيه علامات لازم ننتبه لها. إذا الحرارة فوق 39 درجة وما تنزل، أو استمرت أكثر من 5 أيام، أو الطفل ما يبي يشرب، أو لون جسمه شاحب أو مبقع، أو نومه غير طبيعي، لازم يشوفه دكتور نفس اليوم. خليه مرتاح، عطيه سوائل كثير، ولبسيه خفيف ولا تلفينه. إذا الحرارة طلعت فوق 40 درجة أو تنفسه تغير أو صعب توقظينه، الحالة عاجلة وروحي الدكتور أو الطوارئ.",
+    "source": "NHS",
+    "source_url": "https://www.nhs.uk/conditions/baby/health/high-temperature-fever-in-children/",
+    "severity_tag": "amber",
+    "age_range_months": [3, 36]
+  },
+  {
+    "chunk_id": "kb_il_003",
+    "topic": "illness",
+    "text_en": "Breathing distress in a baby is always urgent. Warning signs include the chest sucking in below the ribs with each breath, fast breathing more than 60 per minute in a calm baby, grunting at the end of each breath, blue or grey lips or tongue, or long pauses between breaths. Do not wait. Call emergency services or take the baby to the nearest ER right away. While you travel, keep the baby upright and calm. This is the kind of symptom where minutes matter, so consult a doctor or go to the ER without hesitation.",
+    "text_ar": "ضيق التنفس عند الأطفال دايماً حالة عاجلة. من العلامات: الصدر يشد لداخل تحت الضلوع مع كل نفس، تنفس سريع أكثر من 60 مرة في الدقيقة والطفل هادي، صوت أنين مع نهاية كل نفس، شفايف أو لسان أزرق أو رمادي، أو فترات سكون طويلة بين الأنفاس. لا تنتظرين أبداً. اتصلي بالطوارئ أو ودّي الطفل لأقرب مستشفى على طول. وأنتي رايحة خليه جالس ومرتاح. هذي الحالة الدقايق فيها مهمة، فاستشيري دكتور أو روحي الطوارئ بدون تردد.",
+    "source": "AAP",
+    "source_url": "https://www.healthychildren.org/English/health-issues/conditions/chest-lungs/Pages/Symptoms-of-Respiratory-Distress.aspx",
+    "severity_tag": "red",
+    "age_range_months": [0, 36]
+  },
+  {
+    "chunk_id": "kb_il_004",
+    "topic": "illness",
+    "text_en": "Visible blood in a baby's stool or vomit always needs medical assessment the same day. Bright red blood in vomit, dark coffee-ground vomit, black tarry stools, or red streaks mixed through stool can point to a milk-protein allergy, a tear in the gut, or something more serious that needs investigation. Do not try home remedies. Consult a doctor immediately or go to the ER, especially if the baby is also lethargic, refusing feeds, has a hard belly, or shows signs of dehydration.",
+    "text_ar": "إذا شفتي دم واضح في براز الطفل أو في الترجيع، لازم يشوفه دكتور نفس اليوم. الدم الأحمر الواضح في الترجيع، أو ترجيع غامق يشبه القهوة، أو براز أسود لزج، أو خطوط حمر مع البراز، ممكن تدل على حساسية بروتين الحليب أو تمزق في الأمعاء أو حاجة أخطر تبي فحص. لا تجربين علاجات بيت. استشيري دكتور على طول أو روحي الطوارئ، خصوصاً إذا الطفل خامل أو رافض الرضاعة أو بطنه قاسية أو فيه علامات جفاف.",
+    "source": "NHS",
+    "source_url": "https://www.nhs.uk/conditions/diarrhoea-and-vomiting/",
+    "severity_tag": "red",
+    "age_range_months": [0, 36]
+  },
+  {
+    "chunk_id": "kb_il_005",
+    "topic": "illness",
+    "text_en": "Severe dehydration in a baby is a medical emergency. Watch for a sunken soft spot on top of the head, dry mouth and tongue, no tears when crying, fewer than three wet diapers in 24 hours, very dark urine, sunken eyes, or unusual sleepiness. If you see these, do not wait at home. Consult a doctor or go to the ER right away because babies can lose fluids fast during vomiting or diarrhea. Oral rehydration salts at home are only suitable for mild cases and only after a clinician advises.",
+    "text_ar": "الجفاف الشديد عند الأطفال حالة طارئة. انتبهي للنقرة المنخفضة فوق الراس، الفم واللسان جافين، ما يطلع دموع لما يبكي، أقل من ثلاث حفاضات مبللة في 24 ساعة، البول لونه غامق، العيون غايرة، أو نوم غير طبيعي. إذا شفتي هالعلامات لا تنتظرين في البيت. استشيري دكتور أو روحي الطوارئ على طول، لأن الطفل يفقد سوايله بسرعة وقت الترجيع أو الإسهال. أملاح الجفاف الفموية في البيت تنفع بس للحالات البسيطة وبعد ما يقول الدكتور.",
+    "source": "WHO",
+    "source_url": "https://www.who.int/news-room/fact-sheets/detail/diarrhoeal-disease",
+    "severity_tag": "red",
+    "age_range_months": [0, 60]
+  },
+  {
+    "chunk_id": "kb_il_006",
+    "topic": "illness",
+    "text_en": "A common cold in babies usually shows up as a runny nose, mild cough, sneezing, and a slightly raised temperature for a few days. Most colds resolve on their own in 7 to 10 days. Helpful comfort measures include saline nose drops before feeds, gentle nasal aspiration, keeping the baby upright when awake, and offering breast or formula more often. Antibiotics do not help viral colds. See a pediatrician if symptoms last more than 10 days, the cough becomes harsh, or the baby seems unusually unwell.",
+    "text_ar": "الزكام عند الأطفال عادة يبدأ برشح بالأنف وكحة خفيفة وعطاس وحرارة بسيطة كم يوم. أغلب نزلات البرد تروح لحالها في 7 إلى 10 أيام. اللي يساعد: قطرات ملحية قبل الرضاعة، شفاط أنف لطيف، الطفل يكون جالس وقت ما يصحى، وزيادة الرضاعة من الثدي أو الحليب الصناعي. المضادات الحيوية ما تنفع للزكام لأنه فيروس. شوفي طبيب الأطفال إذا الأعراض تجاوزت 10 أيام، أو الكحة صارت ناشفة وقوية، أو الطفل تعبان أكثر من اللازم.",
+    "source": "HealthyChildren",
+    "source_url": "https://www.healthychildren.org/English/health-issues/conditions/ear-nose-throat/Pages/Children-and-Colds.aspx",
+    "severity_tag": "green",
+    "age_range_months": [0, 36]
+  },
+  {
+    "chunk_id": "kb_il_007",
+    "topic": "illness",
+    "text_en": "Teething usually starts between 4 and 7 months and can cause sore gums, drooling, mild fussiness, and a slight increase in chewing. Gentle gum massage with a clean finger, a chilled silicone teething ring, and extra cuddles often help. Teething does not cause high fever, diarrhea, or vomiting; if these are present, look for another cause. Avoid teething gels with benzocaine and amber teething necklaces, both of which carry safety risks. If discomfort is severe or you are unsure, ask your pediatrician.",
+    "text_ar": "التسنين عادة يبدأ بين 4 و7 شهور وممكن يسبب احمرار اللثة، لعاب، عصبية بسيطة وزيادة في العض. تدليك اللثة بإصبع نظيف، عضّاضة سيليكون مبردة، وحضن وحنان من أمه يساعدون كثير. التسنين ما يسبب حرارة عالية ولا إسهال ولا ترجيع؛ إذا حصلت هالأعراض دوّري على سبب ثاني. تجنبي جل التسنين اللي فيه بنزوكين وقلادة الكهرمان، الاثنين فيهم خطر. إذا الألم شديد أو ما أنتي متأكدة، اسألي طبيب الأطفال.",
+    "source": "AAP",
+    "source_url": "https://www.healthychildren.org/English/ages-stages/baby/teething-tooth-care/Pages/Teething-4-to-7-Months.aspx",
+    "severity_tag": "green",
+    "age_range_months": [4, 24]
+  },
+  {
+    "chunk_id": "kb_il_008",
+    "topic": "illness",
+    "text_en": "Most baby rashes are mild and harmless, including milk spots, heat rash, and diaper rash. Keep the area clean and dry, change diapers often, and use a barrier cream for diaper rash. See a doctor the same day if a rash spreads quickly, looks like dark purple spots that do not fade when pressed with a clear glass, comes with fever, or makes the baby very sleepy or floppy, since these can be signs of serious infection such as meningococcal disease and need urgent assessment.",
+    "text_ar": "أغلب الطفح الجلدي عند الأطفال بسيط، مثل حبوب الحليب وحبوب الحرارة والتسلخ من الحفاضة. خلي المنطقة نظيفة وجافة، غيّري الحفاضة كثير، واستخدمي كريم حماية للتسلخ. شوفي الدكتور نفس اليوم إذا الطفح ينتشر بسرعة، أو شكله نقط بنفسجية غامقة ما تختفي لما تضغطين عليها بكاسة شفافة، أو معاه حرارة، أو الطفل صار ناعس وضعيف، لأن هذي ممكن تكون علامة عدوى خطيرة مثل المكورات السحائية وتحتاج فحص عاجل.",
+    "source": "NHS",
+    "source_url": "https://www.nhs.uk/conditions/baby/health/skin-rashes-in-babies/",
+    "severity_tag": "amber",
+    "age_range_months": [0, 36]
+  },
+  {
+    "chunk_id": "kb_fd_001",
+    "topic": "feeding",
+    "text_en": "Newborns who are exclusively breastfed typically feed 8 to 12 times in 24 hours, with sessions every 2 to 3 hours including overnight. Wet diapers are the most reliable sign of adequate intake; expect at least 6 to 8 wet diapers per day after the first week. Cluster feeding in the evenings is normal in the first few months and does not mean low milk supply. Steady weight gain after the first two weeks and a content baby between feeds are good signs that feeding is going well.",
+    "text_ar": "المواليد اللي يرضعون من الثدي بس عادة يرضعون من 8 إلى 12 مرة في 24 ساعة، يعني كل ساعتين إلى ثلاث ليل ونهار. الحفاضات المبللة أحسن دليل إن الرضاعة كافية، لازم 6 إلى 8 حفاضات مبللة في اليوم بعد الأسبوع الأول. الرضاعة المتكررة بالليل في أول كم شهر شي طبيعي ومو معناتها إن الحليب ناقص. زيادة الوزن الثابتة بعد أول أسبوعين والطفل مرتاح بين الرضعات علامات إن الأمور تمام.",
+    "source": "WHO",
+    "source_url": "https://www.who.int/health-topics/breastfeeding",
+    "severity_tag": "green",
+    "age_range_months": [0, 6]
+  },
+  {
+    "chunk_id": "kb_fd_002",
+    "topic": "feeding",
+    "text_en": "Solid foods are usually introduced around 6 months when the baby can sit with support, holds her head steady, and shows interest in food. Start with iron-rich first foods such as well-cooked pureed lentils, mashed beans, or soft meat. Offer one new food at a time and watch for any reaction. Continue breast milk or formula as the main source of nutrition until 12 months. Avoid honey before 1 year, whole nuts, and added salt or sugar. Sit the baby upright and stay with her during meals.",
+    "text_ar": "غالباً نبدأ الطعام الصلب حوالي عمر 6 شهور لما الطفلة تقدر تجلس بمساند، تثبّت راسها، وتبين انها مهتمة بالأكل. ابدئي بأكلات غنية بالحديد مثل عدس مهروس مطبوخ زين، أو فول مهروس، أو لحم طري. قدمي صنف جديد واحد كل مرة وراقبي أي رد فعل. استمري في حليب الثدي أو الحليب الصناعي كمصدر أساسي للتغذية لين عمر سنة. تجنبي العسل قبل عمر سنة والمكسرات الكاملة والملح والسكر المضاف. خليها جالسة معتدلة وكوني معاها وقت الأكل.",
+    "source": "WHO",
+    "source_url": "https://www.who.int/news-room/fact-sheets/detail/infant-and-young-child-feeding",
+    "severity_tag": "green",
+    "age_range_months": [6, 12]
+  },
+  {
+    "chunk_id": "kb_fd_003",
+    "topic": "feeding",
+    "text_en": "Formula must be prepared safely to protect against infection. Boil fresh water, let it cool for no more than 30 minutes so it stays at least 70C, then add the powder using the scoop provided. Always add water to the bottle first and then the powder, never the reverse. Make a fresh feed each time when possible, and discard any feed left after 2 hours at room temperature or 1 hour once the baby has started feeding. Sterilise bottles and teats until 12 months.",
+    "text_ar": "الحليب الصناعي لازم يتحضر بطريقة آمنة عشان نحمي الطفل من العدوى. اغلي ماي طازج، خليه يبرد فترة ما تتجاوز 30 دقيقة عشان يضل فوق 70 درجة، وبعدين ضيفي البودرة بالمكيال اللي مع العلبة. دايماً صبي الماي في الرضاعة الأول وبعدين البودرة، مو العكس. حضّري وجبة جديدة كل مرة لو تقدرين، وإذا بقى من الرضعة 2 ساعة على درجة الغرفة أو ساعة بعد ما الطفل بدأ يرضع منها، كبيها. عقّمي الرضاعات والحلمات لين عمر سنة.",
+    "source": "NHS",
+    "source_url": "https://www.nhs.uk/conditions/baby/breastfeeding-and-bottle-feeding/bottle-feeding/making-up-baby-formula/",
+    "severity_tag": "amber",
+    "age_range_months": [0, 12]
+  },
+  {
+    "chunk_id": "kb_fd_004",
+    "topic": "feeding",
+    "text_en": "Spitting up small amounts after feeds is common in the first year and usually does not need treatment if the baby is gaining weight and seems comfortable. Helpful steps include feeding in a more upright position, burping during and after the feed, and avoiding overfeeding. See a pediatrician if the baby vomits forcefully, refuses feeds, has poor weight gain, arches back in pain, or there is blood or green colour in the vomit, since these can point to reflux disease or another condition that needs review.",
+    "text_ar": "الترجيع بكميات صغيرة بعد الرضاعة شي شائع في أول سنة وعادة ما يحتاج علاج طول ما الوزن زاين والطفل مرتاح. اللي يساعد: ارضعيه وهو شبه جالس، طلّعي تكريعة في النص وبعد الرضعة، وتجنبي تشبيعه أكثر من اللازم. شوفي طبيب الأطفال إذا الترجيع قوي وفجائي، أو رافض الرضاعة، أو وزنه ما يزيد، أو يقوس ظهره من الألم، أو فيه دم أو لون أخضر في الترجيع، لأن هذي ممكن تكون ارتجاع مرضي أو حاجة ثانية تحتاج فحص.",
+    "source": "HealthyChildren",
+    "source_url": "https://www.healthychildren.org/English/ages-stages/baby/feeding-nutrition/Pages/Why-Babies-Spit-Up.aspx",
+    "severity_tag": "amber",
+    "age_range_months": [0, 12]
+  },
+  {
+    "chunk_id": "kb_fd_005",
+    "topic": "feeding",
+    "text_en": "Healthy newborns do not usually need extra water in the first 6 months because breast milk and formula already provide enough hydration. Giving plain water before 6 months can fill a baby's small stomach, reduce milk intake, and in larger amounts can disturb sodium balance. Once solids start at around 6 months, small sips of water from an open or free-flow cup with meals are fine. In the hot Gulf summer, increase the frequency of milk feeds rather than offering water.",
+    "text_ar": "المواليد الأصحاء عادة ما يحتاجون ماي إضافي في أول 6 شهور لأن حليب الثدي أو الحليب الصناعي يكفي للترطيب. إعطاء الماي قبل 6 شهور يعبّي معدة الطفل الصغيرة ويقلل كمية الحليب، وبكميات أكبر ممكن يخرّب توازن الصوديوم. لما يبدأ الطعام الصلب حوالي 6 شهور، رشفات صغيرة من ماي بكاسة مفتوحة مع الأكل ما فيها مشكلة. في صيف الخليج الحار، زيدي عدد الرضعات بدل ما تعطين الماي.",
+    "source": "WHO",
+    "source_url": "https://www.who.int/tools/elena/interventions/exclusive-breastfeeding",
+    "severity_tag": "green",
+    "age_range_months": [0, 6]
+  },
+  {
+    "chunk_id": "kb_sl_001",
+    "topic": "sleep",
+    "text_en": "Always place babies on their back to sleep on a firm flat mattress with no loose bedding, pillows, bumpers, or soft toys. The crib or bassinet should share the parents' room for the first 6 months but be a separate sleep space. Room temperature between 16 and 20C reduces sudden infant death syndrome risk; in Gulf homes with strong air conditioning, check that the baby is not too cold by feeling the chest or back of the neck rather than the hands.",
+    "text_ar": "دايماً نومي الطفل على ظهره، على فراش ثابت ومستوي بدون أغطية فضفاضة أو مخدات أو حواجز سرير أو ألعاب طرية. السرير أو سلة النوم يكونون في غرفة الأم والأب أول 6 شهور بس بمكان نوم منفصل. حرارة الغرفة بين 16 و20 درجة تقلل خطر متلازمة موت الرضع المفاجئ؛ في بيوت الخليج اللي تكييفها قوي تحققي إن الطفل مو بارد بلمس صدره أو خلف رقبته، مو يديه.",
+    "source": "AAP",
+    "source_url": "https://www.healthychildren.org/English/ages-stages/baby/sleep/Pages/A-Parents-Guide-to-Safe-Sleep.aspx",
+    "severity_tag": "green",
+    "age_range_months": [0, 12]
+  },
+  {
+    "chunk_id": "kb_sl_002",
+    "topic": "sleep",
+    "text_en": "Newborn sleep is fragmented because their stomachs are small and they wake to feed. Most babies start to consolidate longer night stretches between 3 and 6 months, and many can manage 6 to 8 hours overnight by 6 months when daytime feeding is well established. A consistent wind-down routine of dim light, a warm bath, a feed, and a song helps signal sleep. Avoid screens before bed. If the baby still wakes hourly past 6 months, it is worth discussing with the pediatrician.",
+    "text_ar": "نوم المواليد متقطع لأن معدتهم صغيرة ويصحون عشان يرضعون. أغلب الأطفال يبدون يجمعون فترات نوم أطول بالليل بين عمر 3 و6 شهور، وكثير منهم يقدرون ينامون 6 لين 8 ساعات بالليل بعمر 6 شهور لما الرضاعة بالنهار تكون منتظمة. روتين هادي قبل النوم مع ضو خفيف، حمام دافي، رضعة، وأغنية يساعد الطفل يفهم إنه وقت النوم. تجنبي الشاشات قبل النوم. إذا بعد عمر 6 شهور لازال يصحى كل ساعة، احكي مع طبيب الأطفال.",
+    "source": "AAP",
+    "source_url": "https://www.healthychildren.org/English/ages-stages/baby/sleep/Pages/Getting-Your-Baby-to-Sleep.aspx",
+    "severity_tag": "green",
+    "age_range_months": [0, 12]
+  },
+  {
+    "chunk_id": "kb_sl_003",
+    "topic": "sleep",
+    "text_en": "Once a baby starts rolling, usually around 4 to 6 months, swaddling with the arms in should stop because a swaddled baby who rolls onto her tummy cannot push up safely. Move to a wearable sleep sack with arms free. Choose a TOG rating that suits the room: about 0.5 TOG for warm Gulf nights with strong AC at 24C and up, 1.0 TOG for moderate rooms, and 2.5 TOG only for cooler winter rooms. Always check the chest, not the hands, to judge warmth.",
+    "text_ar": "أول ما الطفل يبدأ يتقلب، عادة بين 4 و6 شهور، لازم نوقف القماط اللي يلف اليدين لأن الطفل لو انقلب على بطنه ما يقدر يدفع نفسه بأمان. حوّلي على كيس نوم يلبس واليدين حرة. اختاري درجة توج مناسبة للغرفة: حوالي 0.5 توج لليالي الخليج الدافية لما التكييف 24 وفوق، 1.0 توج لغرفة معتدلة، و2.5 توج بس في غرف الشتاء الباردة. دايماً تأكدي من حرارة الصدر مو اليدين.",
+    "source": "NHS",
+    "source_url": "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/reduce-the-risk-of-sudden-infant-death-syndrome/",
+    "severity_tag": "amber",
+    "age_range_months": [3, 24]
+  },
+  {
+    "chunk_id": "kb_sf_001",
+    "topic": "safety",
+    "text_en": "Babies and toddlers ride safely only in a properly fitted rear-facing car seat that is anchored using ISOFIX or the seat belt according to the manual. Keep the child rear-facing for as long as the seat allows, ideally until at least 2 years old, because this position protects the head, neck, and spine in a crash. The harness should be snug with no slack at the shoulders and the chest clip at armpit level. Remove bulky jackets before strapping in, especially in winter trips out of the Gulf.",
+    "text_ar": "الأطفال يكونون آمنين بالسيارة بس في كرسي مناسب لعمرهم باتجاه الخلف، ومثبّت زين بـ ISOFIX أو حزام الأمان حسب دليل الكرسي. خليه باتجاه الخلف أطول فترة يسمح بها الكرسي، الأفضل لين عمر سنتين على الأقل، لأن هالوضعية تحمي الراس والرقبة والظهر في حادث. الحزام لازم يكون مشدود بدون فراغ عند الكتفين والمشبك على مستوى الإبط. شيلي الجاكيتات الثقيلة قبل ما تربطين الحزام، خصوصاً في رحلات الشتا برّا الخليج.",
+    "source": "AAP",
+    "source_url": "https://www.healthychildren.org/English/safety-prevention/on-the-go/Pages/Car-Safety-Seats-Information-for-Families.aspx",
+    "severity_tag": "amber",
+    "age_range_months": [0, 36]
+  },
+  {
+    "chunk_id": "kb_sf_002",
+    "topic": "safety",
+    "text_en": "Choking is one of the leading causes of injury in young children. Until at least age 4, avoid whole grapes, whole nuts, popcorn, hard candies, large chunks of meat or cheese, and raw firm vegetables. Cut grapes and cherry tomatoes into quarters lengthwise and slice sausages into thin strips. Always sit with your baby during meals and never let her eat in the car seat or on the move. Learn infant CPR and back blows; many Gulf hospitals run short courses for parents.",
+    "text_ar": "الاختناق من أكبر أسباب الإصابات عند الأطفال الصغار. لين عمر 4 سنين على الأقل، تجنبي العنب الكامل، المكسرات الكاملة، الفشار، الحلوى الصلبة، قطع اللحم أو الجبن الكبيرة، والخضار النية القاسية. قصّي العنب والطماط الصغير لأربع قطع طولياً، وقطّعي السجق شرايح رفيعة. دايماً اقعدي مع طفلتك وقت الأكل ولا تخلينها تاكل في كرسي السيارة أو وهي تتحرك. تعلمي إنعاش الأطفال والضربات على الظهر؛ كثير من مستشفيات الخليج فيها دورات قصيرة للأمهات.",
+    "source": "AAP",
+    "source_url": "https://www.healthychildren.org/English/health-issues/injuries-emergencies/Pages/Choking-Prevention.aspx",
+    "severity_tag": "amber",
+    "age_range_months": [0, 48]
+  },
+  {
+    "chunk_id": "kb_sk_001",
+    "topic": "skincare",
+    "text_en": "Newborn skin is thinner and loses moisture faster than adult skin. Daily baths are not needed; two or three baths a week with lukewarm water and a mild fragrance-free wash are usually enough. Pat the skin dry rather than rubbing, then apply a fragrance-free moisturiser within three minutes to lock in water. In Gulf homes with strong AC and low humidity, dry patches and mild eczema are common; consistent moisturising and avoiding hot water often help. Speak to a pediatrician if redness, weeping, or itching is severe.",
+    "text_ar": "بشرة المواليد أرق من بشرة الكبار وتفقد رطوبتها أسرع. مو لازم استحمام يومي؛ مرتين أو ثلاث في الأسبوع بماي فاتر وغسول لطيف بدون عطر يكفون عادة. نشّفي بالربت مو الفرك، وبعدها بثلاث دقايق حطي مرطب خالي من العطر عشان يقفل الرطوبة. في بيوت الخليج اللي تكييفها قوي ورطوبتها قليلة، تشقق البشرة والإكزيما الخفيفة شي شائع؛ الترطيب المنتظم وتجنّب الماي الحار يساعدون. شوفي طبيب الأطفال إذا الاحمرار أو الحكة أو التقشّر صار شديد.",
+    "source": "AAP",
+    "source_url": "https://www.healthychildren.org/English/ages-stages/baby/bathing-skin-care/Pages/default.aspx",
+    "severity_tag": "green",
+    "age_range_months": [0, 24]
+  },
+  {
+    "chunk_id": "kb_pp_001",
+    "topic": "postpartum",
+    "text_en": "The first six weeks after birth are physically and emotionally demanding. Many mothers experience baby blues with mood swings and tearfulness in the first two weeks; this usually settles on its own. Postpartum depression is different; if low mood, anxiety, sleep problems beyond the baby's waking, intrusive thoughts, or feeling disconnected from the baby last more than two weeks, talk to a clinician. Eat regular meals, accept help from family, hydrate well in the Gulf heat, and protect short windows of rest. You matter as much as the baby.",
+    "text_ar": "أول ست أسابيع بعد الولادة فيها تعب جسدي ونفسي. كثير من الأمهات يحسون بكآبة النفاس البسيطة مع تقلب مزاج وبكاء في أول أسبوعين، وهذي عادة تروح لحالها. اكتئاب ما بعد الولادة شي مختلف؛ إذا الحزن أو القلق أو مشاكل النوم خارج صحوات الطفل أو أفكار مزعجة أو الإحساس إنك بعيدة عن طفلك استمر أكثر من أسبوعين، تكلمي مع دكتور. كلي وجبات منتظمة، اقبلي مساعدة الأهل، اشربي ماي زين في حر الخليج، وخذي فترات راحة قصيرة. أنتي مهمة مثل الطفل تماماً.",
+    "source": "NHS",
+    "source_url": "https://www.nhs.uk/mental-health/conditions/post-natal-depression/overview/",
+    "severity_tag": "amber",
+    "age_range_months": [0, 12]
+  }
+]
