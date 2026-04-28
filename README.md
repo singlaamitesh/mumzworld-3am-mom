@@ -21,44 +21,79 @@ Five end-to-end flows in the 3-min Loom (per brief requirement, including at lea
 4. **Out-of-scope:** "What's the best mortgage rate?" → polite refusal in one sentence.
 5. **IDK case:** unsupported question → "I don't know" + pediatrician suggestion. No fabrication.
 
+## What we built
+
+**A purpose-built voice frontend, not a generic chat widget.** The headline interface lives at `voice/static/index.html` — vanilla HTML, CSS, and ES-module JS (no build step, no React). Mumzworld-inspired pink-coral palette on a warm cream background, deep aubergine ink, Fraunces serif for typography. A single living gradient orb is the visual hero — it breathes when idle, pulses with your mic amplitude when listening, spins gently while the agent is thinking, and ripples with the agent's voice waveform when speaking. Streaming transcripts render inline as soft chat bubbles with auto-detected RTL for Arabic. Escalation banners slide in at the top in deep crimson. Product cards drop into the conversation with EN+AR names and AED prices.
+
+Under the hood, the page opens a **WebSocket** to a small FastAPI server (`voice/server.py`) that bridges the browser audio to Gemini 3.1 Flash Live in both directions:
+- Browser → server: PCM16 16kHz mono captured via `AudioWorkletNode`, resampled in JS, sent as binary frames every ~100ms
+- Server → browser: PCM16 24kHz audio chunks scheduled gaplessly via `AudioBufferSourceNode` + JSON frames for transcripts, tool calls, escalation banners, and product cards
+
+The session is **continuous and multi-turn**: ask, listen, ask again, no reconnect. Server-side watchdog auto-ends after 60s of real silence (post-first-turn) or a 10-minute hard cap. Tool calls run locally on the server and stream back to the UI as they resolve.
+
+A **secondary Streamlit chat** lives at `app.py` for typed-only interaction; that's the surface the eval suite hits because text mode is deterministic and free of audio-codec variance. The headline demo, the Loom, and what a Mumzworld customer would actually use is the custom voice UI.
+
 ## Setup (under 5 minutes)
 
 ```bash
-git clone <repo>
-cd MumzWorld
+git clone https://github.com/singlaamitesh/mumzworld-3am-mom
+cd mumzworld-3am-mom
 cp .env.example .env   # then fill GOOGLE_API_KEY + OPENROUTER_API_KEY
 python3.11 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 python -m src.index_kb       # one-time embedding (~1-2 min, 35 docs)
 
-# Voice (the headline) — FastAPI + WebSocket + custom HTML/JS frontend
+# Primary surface — voice, custom UI on FastAPI + WebSocket + Gemini Live
 uvicorn voice.server:app --port 8000     # then open http://localhost:8000
 
-# Text-only fallback / eval-shape demo (Streamlit)
+# Secondary surface — text-only Streamlit chat (also what the eval suite uses)
 streamlit run app.py                     # opens http://localhost:8501
 ```
-
-The **voice surface** at `http://localhost:8000` is a continuous bidirectional WebSocket session against Gemini 3.1 Flash Live: tap the orb to talk, transcripts stream in real time, the agent talks back, and the session auto-ends after 20s of silence. The **text surface** at `http://localhost:8501` is the Streamlit chat that the eval suite shares; it's the rubric-graded path.
 
 ## Architecture
 
 ```
-Streamlit chat ─┬─ text input  → Agent.turn(text)   ── OpenRouter, gpt-oss-120b (free)
-(voice toggle)  └─ mic via webrtc → Agent.stream(audio) ── Gemini 3.1 Flash Live preview
-                            │
-                            ├─ escalation_check (NICE NG143 regex, EN+AR)
-                            ├─ knowledge_search (LanceDB + Nemotron Embed via OpenRouter)
-                            └─ product_search   (LanceDB + Nemotron Embed via OpenRouter)
-                            │
-                            AgentResponse (Pydantic) → evals/results.json
-                            Eval judge: GLM-4.5-Air via OpenRouter (different family)
+                    ┌───────────────────────────────────────────────────┐
+                    │  voice/static/index.html  (custom HTML/CSS/JS)     │
+                    │  Mumzworld theme · Fraunces · animated orb · RTL  │
+                    └────────────────┬──────────────────────────────────┘
+                                     │ WebSocket
+                                     │ binary frames: PCM16 16k ↔ 24k
+                                     │ JSON frames: transcripts, tools, banners
+                                     ▼
+                    ┌───────────────────────────────────────────────────┐
+                    │  voice/server.py  (FastAPI WebSocket bridge)       │
+                    │  session lifecycle · watchdog · audio piping       │
+                    └────────────────┬──────────────────────────────────┘
+                                     │
+                                     ▼
+              ┌─────────────────────────────────────────────────────────┐
+              │  Gemini 3.1 Flash Live preview  (Google AI Studio)        │
+              │  bidirectional audio + per-turn function-calling          │
+              └────┬────────────────────┬──────────────────────────┬─────┘
+                   │                    │                          │
+                   ▼                    ▼                          ▼
+        escalation_check         knowledge_search              product_search
+        NICE NG143 regex         LanceDB + Nemotron            LanceDB + Nemotron
+        (EN+AR, no LLM)          Embed via OpenRouter          (with age filter)
+
+   ┌──────────────────────────────────────────────────────────────────┐
+   │  app.py  (Streamlit, secondary)  →  Agent.turn(text)             │
+   │      uses GPT-OSS-120B-free via OpenRouter                       │
+   │                                                                  │
+   │  evals/run_evals.py  →  Agent.turn(text) for 12 cases            │
+   │      judged by GLM-4.5-Air-free via OpenRouter                   │
+   │      (different family from agent — no same-model self-grading)  │
+   └──────────────────────────────────────────────────────────────────┘
 ```
 
 **Why this shape:**
+- **Custom voice UI, not Streamlit.** Streamlit's request-response model fights bidirectional audio streaming and re-runs the entire script on every interaction; we tried it first and the latency + state-management cost was severe. A small FastAPI WebSocket + a single hand-written HTML/JS page gives a Gemini-Live-grade UX with ~250 lines of vanilla JS and no framework. Also lets the design actually feel like Mumzworld — soft pink, generous serif, calm motion — rather than a generic Streamlit chat.
 - **Hard-coded escalation, not LLM safety classifier.** Pediatric LLM diagnosis has documented 83% error rates ([JAMA Pediatrics 2024](https://jamanetwork.com/journals/jamapediatrics/articlepdf/2813283/)). Regex on NICE NG143 categories is deterministic, auditable, fast.
 - **Different model for the eval judge.** GLM-4.5-Air grades agent output from GPT-OSS-120B — different families, no same-model self-grading.
 - **Free tools throughout.** Brief says paid keys are not required to score well. Both LLMs and the embedding model are free OpenRouter endpoints. Only the voice path uses a paid Gemini API call.
 - **Two-API split.** Gemini API for voice (only Live supports the audio loop). OpenRouter for everything else (per brief recommendation, all free models).
+- **Text mode is the eval-graded path on purpose.** The eval suite runs through the deterministic text-mode entry point, not voice — keeping rubric scores stable even if Live's preview SDK signatures shift between submission and review.
 
 ## Eval results
 
@@ -81,13 +116,29 @@ Per-case scores live in [`evals/results.json`](evals/results.json). Run `python 
 - **`red_flag_01` (English fever-in-newborn): 6/8.** Agent escalated correctly per NICE NG143 but responded in Arabic to an English input. Language drift on red flag cases — likely because the Arabic escalation advice in the rule engine output bleeds into the model's response language detection. Mitigation: thread `user_input_language` explicitly into the system instruction before each turn.
 - **`product_03` (breast pump query in Arabic): 5/8.** Agent honestly said it didn't have detailed info but didn't call `product_search`. Surfaces a real failure: when the agent is unsure, it should still try the tool before deferring. Prompt could nudge "always call `product_search` for any product question, even if you also express uncertainty."
 
-## Voice status
+## The voice surface in detail
 
-Voice via Gemini 3.1 Flash Live preview (paid). The voice toggle is **OFF by default** in the sidebar; the eval suite exercises text mode only. The voice path is demo polish, not rubric-graded. To try it: set `GOOGLE_API_KEY` in `.env`, launch the app, flip the sidebar toggle, allow mic permissions, and speak. If the preview SDK signatures drift or the browser blocks the mic, text mode keeps working unchanged — that isolation is the point of the two-entry-point split.
+What you see at `http://localhost:8000`:
+
+- **Header**: minimal wordmark *3am Mom · معك ليلاً* in italic Fraunces, with a tiny live/offline indicator on the right.
+- **Stage**: a soft animated orb at the centre, ~280px on desktop, scales fluidly to mobile. The orb has three gradient layers drifting at different speeds, plus a thin compass-rose ring pattern behind it that breathes once every nine seconds.
+- **One control**: a pill button — *TAP TO TALK* — flips to *END SESSION* with a pulsing crimson recording dot once you're live.
+- **Conversation**: bubbles rendered as you speak and as the agent responds. User in dark aubergine right-aligned, agent in cream left-aligned with a Mumzworld-pink edge bar. Arabic auto-flips to RTL. Streaming partials append (don't replace) so the full transcript stays readable for catching up on what was missed in audio.
+- **Inline content**: when `escalation_check` triggers RED, a deep-crimson banner with the NICE NG143 category names and the doctor-referral copy slides in at the top of the conversation. When `product_search` returns matches, up to two product cards drop in with EN+AR names, AED price, short description, and a placeholder *View on Mumzworld* link.
+- **Tool hints**: a small dashed pill ("Looking up guidance…", "Finding products…") appears while a tool call is in flight, then resolves into the answer.
+- **Text fallback**: a quiet text input below the conversation, in case mic permissions are blocked or the audio path is glitchy. Sends typed input over the same WebSocket as a `client_content` turn.
+- **Footer**: model name + session timer.
+
+Session lifecycle (server-side, in `voice/server.py`):
+- Auto-end after **60s of real silence** following the first user-agent exchange — but never before any exchange has happened, so users can sit looking at the orb thinking what to ask.
+- Hard cap at **10 minutes** per session.
+- Watchdog uses a simple RMS-amplitude VAD on incoming PCM frames so background room noise doesn't keep a dead session alive forever.
+- Cleans up cleanly on browser close, manual end, or upstream Live disconnect.
 
 ## Tradeoffs
 
-- **Two-model split for the agent.** Voice runs on Gemini 3.1 Flash Live preview (paid Gemini API) — the headline interaction. Text mode runs on free GPT-OSS-120B via OpenRouter as the fallback in the UI AND as the entry point the eval suite exercises. Both paths share the same system prompt and tool definitions. The split isolates rubric-graded behaviour from Gemini Live's preview SDK volatility.
+- **Two-model split for the agent.** Voice runs on Gemini 3.1 Flash Live preview (paid Gemini API) — the headline interaction in the custom UI. Text mode (`Agent.turn`) runs on free GPT-OSS-120B via OpenRouter — that's what the Streamlit fallback uses AND what the eval suite exercises. Both paths share the same system prompt and tool definitions, so behaviour generalises. The split isolates rubric-graded eval scores from Gemini Live's preview SDK volatility.
+- **Custom HTML/JS frontend over Streamlit voice.** Streamlit was the natural starting point for a Python-only project, but its rerun-the-whole-script-on-every-event model is the wrong shape for continuous bidirectional audio. After hitting that wall, the voice surface moved to a small FastAPI WebSocket + a single hand-written ES-module page. Result is a Mumzworld-themed UX with a real state machine, gapless audio playback, animated mic-reactive orb, RTL transcripts, and inline tool results — all in ~600 lines of HTML/CSS/JS.
 - **LanceDB over Chroma:** modern, embedded, fast cold start.
 - **Nemotron Embed VL via OpenRouter:** free, multilingual, no GPU. OpenRouter is explicitly endorsed in the brief.
 - **Hard-coded escalation, not LLM-based:** deterministic safety, auditable, JAMA-backed reasoning above.
