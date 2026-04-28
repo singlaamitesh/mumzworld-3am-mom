@@ -2,7 +2,7 @@
 
 > A **voice-first** parenting copilot for Mumzworld customers. Speak in English or Arabic, get NICE-grade pediatric red-flag routing, knowledge-grounded answers with explicit "I don't know" behavior, and Mumzworld product recommendations from a synthetic catalog.
 
-[Loom demo](LOOM_LINK_HERE) · [Spec](docs/superpowers/specs/2026-04-27-3am-mom-design.md) · [Implementation plan](docs/superpowers/plans/2026-04-27-3am-mom-implementation.md) · [Eval results](evals/results.json)
+[Loom demo](https://www.loom.com/share/3c60925650804f6384de8ecbd516c046) · [Eval results](evals/results.json)
 
 ## The problem and the gap
 
@@ -154,7 +154,7 @@ Session lifecycle (server-side, in `voice/server.py`):
 - **Why no LangChain / LangGraph:** YAGNI. Three tool functions and a Pydantic schema do not need a framework.
 - **Where I overrode the agent:** reframed escalation as NICE NG143-grounded after researching the canonical pediatric red-flag taxonomy; added the JAMA Pediatrics 2024 citation as the explicit safety justification; ran an adversarial cold-read of my own spec mid-build and used its findings to drop a binary wedge competitor table that wasn't backed by probed transcripts; iterated through three OpenRouter free-tier model picks at runtime (Llama 3.3 70B → Qwen 2.5 → Nemotron 120B → GPT-OSS-120B) when free-tier rate limits and 404s surfaced; tuned LanceDB cosine threshold from 0.5→0.3 after observing real cross-lingual similarity scores.
 - **Model picker rationale:** free-tier OpenRouter availability shifted between plan-time and run-time (Qwen-2.5-72B-instruct:free returned 404, Llama-3.3-70B-instruct:free was rate-limited under load). The current picks are what passed a 9-model live probe with tool-calling support. If they go down at submission time, swap via `src/config.py`.
-- **Prompts** committed at `src/prompts/system_prompt.md` and `src/prompts/eval_judge_prompt.md`. The full design spec, implementation plan, and decision log live under `docs/superpowers/`.
+- **Prompts** committed at `src/prompts/system_prompt.md` and `src/prompts/eval_judge_prompt.md`.
 
 ## Limitations I'm honest about
 
@@ -162,8 +162,36 @@ Session lifecycle (server-side, in `voice/server.py`):
 - **Knowledge base is 20 chunks.** Sized for 5-hour budget. Production needs clinical review by a pediatrician.
 - **Synthetic 15-item catalog.** No Mumzworld product data was scraped (per brief constraint).
 - **NICE NG143 is UK pediatric guidance.** Used as a starting taxonomy. Localizing to Gulf clinical practice would need a regional clinical reviewer.
-- **Time spent:** brief budgets ~5 hours; actual ~8 hours including the runtime model-swap debugging when free-tier OpenRouter models 404'd or rate-limited. Honest breakdown by phase in `docs/architecture.md`.
+- **Time spent:** brief budgets ~5 hours; actual ~8 hours including runtime model-swap debugging when free-tier OpenRouter models 404'd or rate-limited.
 
 ## Repository layout
 
-See [the spec](docs/superpowers/specs/2026-04-27-3am-mom-design.md) for the full file map and decision log.
+```
+src/
+  schemas.py            Pydantic models (agent, RAG, escalation)
+  config.py             env, model names, thresholds
+  agent.py              Agent.turn(text) — OpenRouter, OpenAI tool format
+  index_kb.py           one-shot LanceDB indexer
+  tools/
+    escalation_check.py NICE NG143 regex engine (EN+AR)
+    knowledge_search.py LanceDB + Nemotron Embed retrieval
+    product_search.py   LanceDB + Nemotron Embed + age filter
+  prompts/
+    system_prompt.md
+    eval_judge_prompt.md
+voice/
+  server.py             FastAPI WebSocket bridge to Gemini Live
+  static/
+    index.html          custom voice UI (Mumzworld theme, animated orb)
+    audio-worklet.js    PCM capture worklet
+data/
+  products.json         15 synthetic Mumzworld-style products
+  knowledge_base.json   20 KB chunks paraphrased from WHO/AAP/NHS/NICE/CDC
+  test_cases.json       12 eval cases
+evals/
+  run_evals.py          eval runner (judge on OpenRouter)
+  rubric.md
+  results.json          78/96 first-run scores
+tests/                  19 unit tests (escalation regex, schemas, RAG smoke)
+app.py                  Streamlit text chat (secondary surface)
+```
