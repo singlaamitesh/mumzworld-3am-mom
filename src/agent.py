@@ -1,12 +1,11 @@
-"""3am Mom agent.
+"""3am Mom agent — text-mode entry point shared by Streamlit and the eval suite.
 
-Two entry points:
-- turn(text)      → OpenRouter (Llama 3.3 70B free) — text mode + eval entry point
-- stream(audio)   → Gemini 3.1 Flash Live preview — voice mode (added in Phase 7)
-
-Both share the same system prompt and tool semantics. Voice and text behaviour
-generalise because the system prompt is identical; the eval suite exercises the
-text-mode path, which is more deterministic and free of audio-codec variance.
+`Agent.turn(text)` runs against OpenRouter (free GPT-OSS-120B by default) with
+three tools: NICE NG143 escalation regex, LanceDB knowledge_search, LanceDB
+product_search. The voice surface (`voice/server.py`) reuses this module's
+`SYSTEM_PROMPT`, `GEMINI_TOOL_DECLARATIONS`, and `_execute_tool` but drives the
+Gemini Live session itself — this keeps the OpenAI-tool-format text path and
+the Gemini-tool-format voice path cleanly separate.
 """
 from __future__ import annotations
 import json
@@ -14,12 +13,8 @@ from typing import Any
 
 from openai import OpenAI
 
-from google import genai
-from google.genai import types as gtypes
-
 from src.config import (
     OPENROUTER_API_KEY, OPENROUTER_BASE_URL, AGENT_MODEL, PROMPTS_DIR,
-    GOOGLE_API_KEY, LIVE_MODEL,
 )
 from src.schemas import (
     AgentResponse, Language,
@@ -164,8 +159,6 @@ class Agent:
             base_url=OPENROUTER_BASE_URL,
         )
         self._model = model
-        # Phase 7 will lazy-init a google-genai client here for the voice path.
-        self._gemini_client = None
 
     def turn(self, user_text: str) -> AgentResponse:
         """One synchronous text turn. Loops until the model emits a final assistant text."""
@@ -256,192 +249,3 @@ class Agent:
             in_scope=False,
         )
 
-    async def stream(self, audio_chunks):
-        """Async live audio session. audio_chunks is an async iterable of PCM16 bytes at 16kHz.
-
-        Yields dicts of one of these shapes:
-          {'type': 'transcript_user',  'text': str}
-          {'type': 'transcript_agent', 'text': str}
-          {'type': 'audio',            'data': bytes}    # PCM16 24kHz from Gemini Live
-          {'type': 'tool_call',        'name': str, 'args': dict}
-          {'type': 'tool_done',        'name': str, 'output': dict}
-        """
-        import asyncio
-
-        if not GOOGLE_API_KEY:
-            raise RuntimeError("GOOGLE_API_KEY not set in .env (required for voice mode)")
-
-        # Lazy-init the Gemini client only when voice is actually used.
-        if self._gemini_client is None:
-            self._gemini_client = genai.Client(api_key=GOOGLE_API_KEY)
-
-        gemini_tool = gtypes.Tool(function_declarations=GEMINI_TOOL_DECLARATIONS)
-        live_config = gtypes.LiveConnectConfig(
-            response_modalities=[gtypes.Modality.AUDIO],
-            system_instruction=gtypes.Content(parts=[gtypes.Part(text=SYSTEM_PROMPT)]),
-            tools=[gemini_tool],
-            input_audio_transcription=gtypes.AudioTranscriptionConfig(),
-            output_audio_transcription=gtypes.AudioTranscriptionConfig(),
-        )
-
-        async with self._gemini_client.aio.live.connect(model=LIVE_MODEL, config=live_config) as session:
-            async def _send_audio():
-                async for chunk in audio_chunks:
-                    await session.send_realtime_input(
-                        audio=gtypes.Blob(data=chunk, mime_type="audio/pcm;rate=16000"),
-                    )
-
-            send_task = asyncio.create_task(_send_audio())
-            try:
-                async for message in session.receive():
-                    if getattr(message, "tool_call", None):
-                        for fc in message.tool_call.function_calls:
-                            yield {"type": "tool_call", "name": fc.name, "args": dict(fc.args or {})}
-                            tool_out = _execute_tool(fc.name, dict(fc.args or {}))
-                            await session.send_tool_response(function_responses=[
-                                gtypes.FunctionResponse(id=fc.id, name=fc.name, response=tool_out),
-                            ])
-                            yield {"type": "tool_done", "name": fc.name, "output": tool_out}
-                    if getattr(message, "server_content", None):
-                        sc = message.server_content
-                        if getattr(sc, "input_transcription", None) and sc.input_transcription.text:
-                            yield {"type": "transcript_user", "text": sc.input_transcription.text}
-                        if getattr(sc, "output_transcription", None) and sc.output_transcription.text:
-                            yield {"type": "transcript_agent", "text": sc.output_transcription.text}
-                        if getattr(sc, "model_turn", None) and sc.model_turn.parts:
-                            for p in sc.model_turn.parts:
-                                if getattr(p, "inline_data", None) and p.inline_data.data:
-                                    yield {"type": "audio", "data": p.inline_data.data}
-            finally:
-                send_task.cancel()
-
-
-# ---------------------------------------------------------------------------
-# Voice helpers — used by Streamlit's st.audio_input flow (single-shot)
-# ---------------------------------------------------------------------------
-
-def wav_to_pcm16_16k(wav_bytes: bytes) -> bytes:
-    """Convert a WAV (any sample rate / channel count / sample width) to mono PCM16 at 16kHz.
-
-    st.audio_input returns WAV bytes; Gemini Live wants PCM16 at 16kHz mono.
-    """
-    import io
-    import wave
-    import audioop
-
-    with wave.open(io.BytesIO(wav_bytes), "rb") as w:
-        n_channels = w.getnchannels()
-        sample_width = w.getsampwidth()
-        framerate = w.getframerate()
-        frames = w.readframes(w.getnframes())
-
-    # Stereo → mono
-    if n_channels == 2:
-        frames = audioop.tomono(frames, sample_width, 0.5, 0.5)
-
-    # Any sample width → 16-bit
-    if sample_width != 2:
-        frames = audioop.lin2lin(frames, sample_width, 2)
-
-    # Any rate → 16kHz
-    if framerate != 16000:
-        frames, _ = audioop.ratecv(frames, 2, 1, framerate, 16000, None)
-
-    return frames
-
-
-def pcm16_to_wav(pcm_bytes: bytes, sample_rate: int = 24000) -> bytes:
-    """Wrap PCM16 mono audio in a WAV header (Gemini Live returns PCM16 at 24kHz)."""
-    import io
-    import wave
-
-    buf = io.BytesIO()
-    with wave.open(buf, "wb") as w:
-        w.setnchannels(1)
-        w.setsampwidth(2)
-        w.setframerate(sample_rate)
-        w.writeframes(pcm_bytes)
-    return buf.getvalue()
-
-
-def turn_voice(agent: "Agent", wav_bytes: bytes) -> dict:
-    """One-shot voice turn for Streamlit. Sends a recorded WAV clip, returns
-    a dict with user transcript, agent transcript, response audio (WAV), and
-    any tool-call summaries.
-
-    Synchronous wrapper around an internal asyncio session so Streamlit can
-    just call it without managing event loops.
-    """
-    import asyncio
-
-    if not GOOGLE_API_KEY:
-        raise RuntimeError("GOOGLE_API_KEY not set in .env (required for voice mode)")
-
-    pcm_in = wav_to_pcm16_16k(wav_bytes)
-
-    if agent._gemini_client is None:
-        agent._gemini_client = genai.Client(api_key=GOOGLE_API_KEY)
-
-    gemini_tool = gtypes.Tool(function_declarations=GEMINI_TOOL_DECLARATIONS)
-    live_config = gtypes.LiveConnectConfig(
-        response_modalities=[gtypes.Modality.AUDIO],
-        system_instruction=gtypes.Content(parts=[gtypes.Part(text=SYSTEM_PROMPT)]),
-        tools=[gemini_tool],
-        input_audio_transcription=gtypes.AudioTranscriptionConfig(),
-        output_audio_transcription=gtypes.AudioTranscriptionConfig(),
-    )
-
-    async def _run():
-        user_t: list[str] = []
-        agent_t: list[str] = []
-        audio_chunks: list[bytes] = []
-        tool_log: list[dict] = []
-
-        async with agent._gemini_client.aio.live.connect(model=LIVE_MODEL, config=live_config) as session:
-            # Send the entire clip in 20ms slices to look like real-time audio,
-            # then mark the user's turn complete so the model responds.
-            slice_bytes = int(16000 * 0.02) * 2  # 20ms of PCM16 at 16kHz
-            for i in range(0, len(pcm_in), slice_bytes):
-                chunk = pcm_in[i : i + slice_bytes]
-                if not chunk:
-                    break
-                await session.send_realtime_input(
-                    audio=gtypes.Blob(data=chunk, mime_type="audio/pcm;rate=16000"),
-                )
-            # End of user turn (server-side VAD also helps but be explicit).
-            try:
-                await session.send_realtime_input(audio_stream_end=True)
-            except TypeError:
-                # SDK variant: send_client_content with turn_complete
-                await session.send_client_content(turn_complete=True)
-
-            # Drain server messages until the model signals turn-complete.
-            async for message in session.receive():
-                if getattr(message, "tool_call", None):
-                    for fc in message.tool_call.function_calls:
-                        out = _execute_tool(fc.name, dict(fc.args or {}))
-                        tool_log.append({"name": fc.name, "args": dict(fc.args or {}), "output": out})
-                        await session.send_tool_response(function_responses=[
-                            gtypes.FunctionResponse(id=fc.id, name=fc.name, response=out),
-                        ])
-                if getattr(message, "server_content", None):
-                    sc = message.server_content
-                    if getattr(sc, "input_transcription", None) and sc.input_transcription.text:
-                        user_t.append(sc.input_transcription.text)
-                    if getattr(sc, "output_transcription", None) and sc.output_transcription.text:
-                        agent_t.append(sc.output_transcription.text)
-                    if getattr(sc, "model_turn", None) and sc.model_turn.parts:
-                        for p in sc.model_turn.parts:
-                            if getattr(p, "inline_data", None) and p.inline_data.data:
-                                audio_chunks.append(p.inline_data.data)
-                    if getattr(sc, "turn_complete", False):
-                        break
-
-        return {
-            "user_transcript": "".join(user_t).strip(),
-            "agent_transcript": "".join(agent_t).strip(),
-            "audio_wav": pcm16_to_wav(b"".join(audio_chunks), sample_rate=24000) if audio_chunks else b"",
-            "tool_log": tool_log,
-        }
-
-    return asyncio.run(_run())

@@ -21,8 +21,9 @@ from __future__ import annotations
 
 import asyncio
 import json
+import logging
+import struct
 import time
-from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
@@ -42,23 +43,20 @@ HEARTBEAT_S = 2.0       # how often the watchdog wakes
 SPEECH_RMS_THRESHOLD = 0.005  # below this RMS, audio frame counts as silence (won't reset idle timer)
 
 
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(name)s] %(message)s")
+log = logging.getLogger("voice")
+
+
 def _frame_is_speech(pcm16_bytes: bytes) -> bool:
-    """Cheap VAD: compute RMS amplitude; return True if above threshold."""
+    """Cheap VAD: compute RMS amplitude on a PCM16 frame; True if above threshold."""
     if not pcm16_bytes:
         return False
-    import struct
     n = len(pcm16_bytes) // 2
     if n == 0:
         return False
     samples = struct.unpack(f"<{n}h", pcm16_bytes)
-    sumsq = sum(s * s for s in samples)
-    rms = (sumsq / n) ** 0.5 / 32768.0
+    rms = (sum(s * s for s in samples) / n) ** 0.5 / 32768.0
     return rms > SPEECH_RMS_THRESHOLD
-
-
-import logging
-log = logging.getLogger("voice")
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(name)s] %(message)s")
 
 
 STATIC_DIR = Path(__file__).parent / "static"
